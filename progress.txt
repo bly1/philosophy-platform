@@ -1,5 +1,42 @@
 # Progress Log
 
+## 2026-02-10 - Task 24: 项目详情页 - 图片生成阶段
+
+### What was done:
+- 创建 components/scene/SceneImageCard.tsx 分镜图片卡片组件
+  - 显示分镜序号、描述、生成的图片
+  - 显示图片生成状态 (pending/processing/completed/failed)
+  - processing 状态显示进度动画
+  - 每张卡片显示「重新生成」和「确认」按钮
+  - 已确认的图片显示绿色样式
+- 创建 components/scene/SceneImageList.tsx 图片列表组件
+  - 显示确认进度（已确认 X / Y 张图片）
+  - 顶部显示「生成所有图片」按钮
+  - 底部显示「确认所有图片」按钮（全部完成后显示）
+  - 实现轮询机制检查图片生成状态
+- 更新 app/projects/[id]/page.tsx 项目详情页
+  - 在 images 阶段显示 SceneImageList 组件
+
+### Testing:
+- 运行 npm run lint 通过
+- 运行 npm run build 构建成功
+- ✅ 浏览器测试通过（使用 MCP Playwright）：
+  - 图片列表正确显示（7 个分镜）
+  - 确认进度正确显示
+  - "生成所有图片"按钮正常显示
+  - 每个分镜卡片显示"等待生成"状态
+  - 阶段指示器正确显示当前阶段
+
+### Notes:
+- 图片生成调用 POST /api/generate/image/:sceneId API
+- 批量生成调用 POST /api/generate/images API
+- 确认图片调用 POST /api/scenes/:id/confirm-image API
+- 确认所有图片调用 POST /api/scenes/confirm-all-images API
+- 使用轮询机制（每 5 秒）检查生成状态
+- 确认后进入视频生成阶段
+
+---
+
 ## 2026-02-10 - Task 23: 项目详情页 - 分镜描述阶段
 
 ### What was done:

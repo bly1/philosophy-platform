@@ -1,6 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { StageIndicator } from "@/components/project/StageIndicator";
 import { SceneDescriptionList } from "@/components/scene/SceneDescriptionList";
+import { SceneImageList } from "@/components/scene/SceneImageList";
 import { createClient } from "@/lib/supabase/server";
 import { getProjectById } from "@/lib/db/projects";
 import { redirect, notFound } from "next/navigation";
@@ -181,9 +182,10 @@ export default async function ProjectDetailPage({
             )}
 
             {project.stage === "images" && (
-              <div className="py-4 text-center text-zinc-600 dark:text-zinc-400">
-                <p>图片生成组件将在 Task 24 中实现</p>
-              </div>
+              <SceneImageList
+                projectId={project.id}
+                scenes={project.scenes}
+              />
             )}
 
             {project.stage === "videos" && (
