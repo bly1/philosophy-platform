@@ -176,7 +176,7 @@ export async function getProjectById(
 }
 
 /**
- * Update a project's basic info (title, story, style)
+ * Update a project's basic info (title, story, style, stage)
  * @param projectId - The project ID
  * @param userId - The user ID (for authorization)
  * @param updates - The fields to update
@@ -189,6 +189,7 @@ export async function updateProject(
     title?: string;
     story?: string;
     style?: string;
+    stage?: project_stage;
   }
 ): Promise<Project> {
   const supabase = await createClient();

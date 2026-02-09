@@ -1,5 +1,36 @@
 # Progress Log
 
+## 2026-02-10 - Task 14: 项目 API - CRUD
+
+### What was done:
+- 创建 app/api/projects/route.ts 项目列表 API
+  - GET /api/projects - 获取用户项目列表（支持分页）
+  - POST /api/projects - 创建新项目
+- 创建 app/api/projects/[id]/route.ts 项目详情 API
+  - GET /api/projects/:id - 获取项目详情（包含所有分镜及媒体）
+  - PATCH /api/projects/:id - 更新项目（标题、故事、风格、阶段）
+  - DELETE /api/projects/:id - 删除项目
+- 修复 updateProject 函数支持同时更新基本信息和阶段
+- 所有 API 都验证用户认证和项目所有权
+
+### Testing:
+- 运行 npm run lint 通过
+- 运行 npm run build 构建成功
+- ✅ 浏览器测试通过（使用 MCP Playwright）：
+  - POST /api/projects 返回 201，创建项目成功
+  - GET /api/projects 返回 200，分页正常
+  - GET /api/projects/:id 返回 200，包含 scenes 数组
+  - PATCH /api/projects/:id 同时更新 title 和 stage 成功
+  - DELETE /api/projects/:id 返回 200，删除后 GET 返回 404
+
+### Notes:
+- 所有 API 端点都需要用户登录，未登录返回 401
+- 项目操作验证用户所有权，无权限返回 403
+- 项目不存在返回 404
+- 分页默认每页 20 条
+
+---
+
 ## 2026-02-10 - Task 13: 媒体数据访问层
 
 ### What was done:
