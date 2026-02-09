@@ -1,5 +1,31 @@
 # Progress Log
 
+## 2026-02-10 - Task: 用户认证 - 登录页面
+
+### What was done:
+- 创建 app/login/page.tsx 登录页面
+  - 居中布局，包含标题和副标题
+  - 显示 LoginForm 组件
+- 创建 components/auth/LoginForm.tsx 登录表单组件
+  - 邮箱和密码输入框
+  - 使用 Supabase Auth 进行邮箱+密码登录
+  - 登录成功后跳转到首页
+  - 显示错误信息（支持中文翻译常见错误）
+  - 登录按钮带加载状态
+  - 包含注册链接
+
+### Testing:
+- 运行 npm run lint 通过
+- 运行 npm run build 构建成功
+- /login 页面正确生成
+
+### Notes:
+- 使用 Supabase signInWithPassword 进行登录验证
+- 错误信息已本地化为中文
+- 表单使用 Tailwind CSS 样式
+
+---
+
 ## 2026-02-09 - Task: Supabase 客户端封装
 
 ### What was done:
