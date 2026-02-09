@@ -270,6 +270,116 @@ export async function updateVideoTaskId(
 }
 
 /**
+ * Create a video record in "processing" state (with task_id but no URL yet)
+ * @param sceneId - The scene ID
+ * @param taskId - The video generation task ID
+ * @returns The created video record
+ */
+export async function createProcessingVideo(
+  sceneId: string,
+  taskId: string
+): Promise<Video> {
+  const supabase = await createClient();
+
+  // Get current max version for this scene
+  const { data: existingVideos } = await supabase
+    .from("videos")
+    .select("version")
+    .eq("scene_id", sceneId)
+    .order("version", { ascending: false })
+    .limit(1);
+
+  const nextVersion = (existingVideos?.[0]?.version ?? 0) + 1;
+
+  const videoData: VideoInsert = {
+    scene_id: sceneId,
+    storage_path: "", // Will be updated when video is complete
+    url: "", // Will be updated when video is complete
+    task_id: taskId,
+    version: nextVersion,
+  };
+
+  const { data, error } = await supabase
+    .from("videos")
+    .insert(videoData)
+    .select()
+    .single();
+
+  if (error) {
+    console.error("Error creating processing video:", error);
+    throw new MediaError("Failed to create processing video", "database_error");
+  }
+
+  return data;
+}
+
+/**
+ * Update a video record with the completed video data
+ * @param videoId - The video ID
+ * @param storagePath - Path in storage bucket
+ * @param url - Public URL of the video
+ * @param options - Additional options (duration)
+ * @returns The updated video
+ */
+export async function updateCompletedVideo(
+  videoId: string,
+  storagePath: string,
+  url: string,
+  options: {
+    duration?: number;
+  } = {}
+): Promise<Video> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from("videos")
+    .update({
+      storage_path: storagePath,
+      url,
+      duration: options.duration ?? null,
+    })
+    .eq("id", videoId)
+    .select()
+    .single();
+
+  if (error) {
+    console.error("Error updating completed video:", error);
+    throw new MediaError("Failed to update completed video", "database_error");
+  }
+
+  return data;
+}
+
+/**
+ * Get the latest video for a scene (including processing ones)
+ * @param sceneId - The scene ID
+ * @returns The latest video or null
+ */
+export async function getLatestVideoBySceneIdWithTask(
+  sceneId: string
+): Promise<Video | null> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from("videos")
+    .select("*")
+    .eq("scene_id", sceneId)
+    .order("version", { ascending: false })
+    .limit(1)
+    .single();
+
+  if (error) {
+    if (error.code === "PGRST116") {
+      return null;
+    }
+    console.error("Error fetching latest video:", error);
+    throw new MediaError("Failed to fetch latest video", "database_error");
+  }
+
+  return data;
+}
+
+/**
  * Get all videos for a scene
  * @param sceneId - The scene ID
  * @returns Array of videos (ordered by version desc)

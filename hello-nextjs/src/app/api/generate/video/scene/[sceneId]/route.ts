@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { getSceneById, updateSceneVideoStatus } from "@/lib/db/scenes";
 import { getProjectById } from "@/lib/db/projects";
-import { getLatestImageBySceneId } from "@/lib/db/media";
+import { getLatestImageBySceneId, createProcessingVideo } from "@/lib/db/media";
 import {
   createVideoTask,
   isVolcVideoConfigured,
@@ -21,7 +21,7 @@ interface RouteParams {
 /**
  * POST /api/generate/video/scene/[sceneId] - Create video task for a single scene
  * Body: { projectId: string }
- * Returns: { success: boolean, taskId: string, scene: Scene }
+ * Returns: { success: boolean, taskId: string, videoId: string, scene: Scene }
  */
 export async function POST(request: Request, { params }: RouteParams) {
   try {
@@ -100,9 +100,14 @@ export async function POST(request: Request, { params }: RouteParams) {
         }
       );
 
+      // Create a video record in the database with task_id
+      // This allows frontend to find the task_id even after page refresh
+      const video = await createProcessingVideo(sceneId, task.taskId);
+
       return NextResponse.json({
         success: true,
         taskId: task.taskId,
+        videoId: video.id,
         sceneId,
         status: task.status,
         message: "Video task created successfully",

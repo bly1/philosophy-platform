@@ -11,7 +11,10 @@ import {
   VolcVideoApiError,
   downloadVideo,
 } from "@/lib/ai/volc-video";
-import { uploadAndCreateVideo, deleteOldSceneVideos } from "@/lib/db/media";
+import {
+  updateCompletedVideo,
+  uploadFile,
+} from "@/lib/db/media";
 import { updateSceneVideoStatus } from "@/lib/db/scenes";
 
 interface RouteParams {
@@ -20,7 +23,7 @@ interface RouteParams {
 
 /**
  * GET /api/generate/video/task/[taskId] - Query video task status
- * Query params: sceneId, projectId
+ * Query params: sceneId, projectId, videoId
  * Returns: { success: boolean, status: string, videoUrl?: string }
  */
 export async function GET(request: Request, { params }: RouteParams) {
@@ -47,35 +50,32 @@ export async function GET(request: Request, { params }: RouteParams) {
     const { searchParams } = new URL(request.url);
     const sceneId = searchParams.get("sceneId");
     const projectId = searchParams.get("projectId");
+    const videoId = searchParams.get("videoId");
 
     // Query task status
     const status = await getVideoTaskStatus(taskId);
 
-    // If completed and we have scene/project info, download and save the video
-    if (status.status === "completed" && status.videoUrl && sceneId && projectId) {
+    // If completed and we have all required info, download and save the video
+    if (status.status === "completed" && status.videoUrl && sceneId && projectId && videoId) {
       try {
         // Download video
         const videoBuffer = await downloadVideo(status.videoUrl);
 
-        // Delete old videos
-        await deleteOldSceneVideos(sceneId);
-
-        // Upload to storage and create database record
+        // Upload to storage
         const timestamp = Date.now();
         const fileName = `video-${taskId}-${timestamp}.mp4`;
-
-        const video = await uploadAndCreateVideo(
+        const { path, url } = await uploadFile(
           user.id,
           projectId,
-          sceneId,
           fileName,
           videoBuffer,
-          {
-            duration: 5,
-            taskId: taskId,
-            contentType: "video/mp4",
-          }
+          { contentType: "video/mp4" }
         );
+
+        // Update existing video record with completed data
+        await updateCompletedVideo(videoId, path, url, {
+          duration: 5,
+        });
 
         // Update scene video status to completed
         await updateSceneVideoStatus(sceneId, "completed");
@@ -83,8 +83,8 @@ export async function GET(request: Request, { params }: RouteParams) {
         return NextResponse.json({
           success: true,
           status: "completed",
-          videoUrl: video.url,
-          videoId: video.id,
+          videoUrl: url,
+          videoId,
           message: "Video generated and saved successfully",
         });
       } catch (saveError) {

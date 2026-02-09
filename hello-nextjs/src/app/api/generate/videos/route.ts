@@ -10,7 +10,7 @@ import {
   updateSceneVideoStatus,
 } from "@/lib/db/scenes";
 import { getProjectById, updateProjectStage } from "@/lib/db/projects";
-import { getLatestImageBySceneId } from "@/lib/db/media";
+import { getLatestImageBySceneId, createProcessingVideo } from "@/lib/db/media";
 import {
   createVideoTask,
   isVolcVideoConfigured,
@@ -22,6 +22,7 @@ interface VideoTaskResult {
   orderIndex: number;
   success: boolean;
   taskId?: string;
+  videoId?: string;
   error?: string;
 }
 
@@ -43,11 +44,15 @@ async function createSceneVideoTask(
     // Update scene video status to processing
     await updateSceneVideoStatus(sceneId, "processing");
 
+    // Create a video record in the database with task_id
+    const video = await createProcessingVideo(sceneId, task.taskId);
+
     return {
       sceneId,
       orderIndex,
       success: true,
       taskId: task.taskId,
+      videoId: video.id,
     };
   } catch (error) {
     // Update scene video status to failed
