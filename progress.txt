@@ -1,5 +1,38 @@
 # Progress Log
 
+## 2026-02-09 - Task: Supabase 客户端封装
+
+### What was done:
+- 创建 src/lib/supabase/server.ts - 服务端 Supabase 客户端
+  - 使用 createServerClient 和 cookies() 创建客户端
+  - 适用于 Server Components, Server Actions, Route Handlers
+- 创建 src/lib/supabase/client.ts - 浏览器端 Supabase 客户端
+  - 使用 createBrowserClient 创建客户端
+  - 适用于 Client Components
+- 创建 src/lib/supabase/middleware.ts - 中间件辅助函数
+  - 提供 createClient 函数用于 middleware
+  - 处理 session refresh
+- 创建 src/middleware.ts - 根中间件
+  - 集成 Supabase 中间件
+  - 保护路由: /projects, /create
+  - 未登录用户重定向到 /login
+  - 已登录用户访问 /login, /register 时重定向到首页
+- 创建 src/types/database.ts - 数据库类型定义
+  - 定义所有表类型: projects, scenes, images, videos
+  - 定义枚举类型: project_stage, image_status, video_status
+  - 提供便捷类型: Project, Scene, Image, Video 等
+
+### Testing:
+- 运行 npm run lint 通过
+- 运行 npm run build 构建成功
+
+### Notes:
+- 中间件有 deprecation 警告（Next.js 16 建议使用 proxy），但仍可用
+- Database 类型需根据实际 Supabase schema 更新
+- 中间件已实现基本的认证保护逻辑
+
+---
+
 ## 2026-02-09 - Task: Supabase 数据库 Schema
 
 ### What was done:
