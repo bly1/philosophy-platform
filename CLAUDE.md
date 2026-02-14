@@ -1,5 +1,11 @@
 # Spring FES Video - Project Instructions
 
+## ⚠️ 语言要求 (Language Requirement)
+
+**所有回复必须使用中文！请全程用中文与用户交流。**
+
+---
+
 ## Project Context
 
 A video processing application with Next.js frontend.

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哲学学习平台 - 暂时页面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .hero {
+            text-align: center;
+            color: white;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1.20rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .demo-accounts {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        .demo-accounts h2 {
+            color: #1a2021e;
+            margin-bottom: 16px;
+        }
+        .account-option {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .account-option:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+        .account-option.active {
+            border-color: #10b981;
+            background-color: #10b981;
+            color: white;
+        }
+        .account-option h4 {
+            margin: 0 0 8px 0;
+          color: #1f2937b;
+          font-size: 1.1rem;
+        }
+        .account-option p {
+          margin: 0 0 4px 0;
+          color: #666;
+          font-size: 0.875rem;
+        }
+        .login-btn {
+            width: 100%;
+            background: #0284c7;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: 500;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+        .login-btn:hover {
+            background: #0369a1;
+        }
+        .debug {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 2rem;
+            font-family: monospace;
+        }
+        .debug h3 {
+            margin: 0 0 10px 0;
+          color: #333;
+        }
+        .debug code {
+            background: #1e293b;
+            color: #0d9681;
+            padding: 12px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .success-message {
+            display: none;
+            background: #10b981;
+            color: white;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .error-message {
+            background: #ef4444;
+            color: white;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>哲学与精神分析</h1>
+            <p>探索思想的深度，开启心智之旅</p>
+        </div>
+
+        <!-- Demo Accounts Section -->
+        <div class="demo-accounts">
+            <h2>🚪 快速体验</h2>
+            <div class="account-option" onclick="loginAs('demo')">
+                <h4>演示用户</h4>
+                <p>demo@philosophy.com</p>
+                <p>完整体验所有功能</p>
+            </div>
+            <div class="account-option" onclick="loginAs('guest')">
+                <h4>访客账号</h4>
+                <p>guest@philosophy.com</p>
+                <p>探索基础内容</p>
+            </div>
+        </div>
+
+        <!-- Login Result -->
+        <div id="login-result"></div>
+
+        <!-- Debug Info -->
+        <div class="debug">
+            <h3>🔍 为什么选择我们？</h3>
+            <div class="code">
+curl http://localhost:3003/auth/login
+            </code>
+            <code>
+POST /api/auth JSON:<br/>
+            {"email":"demo@philosophy.com","password":"demo123"}
+            </code>
+        </div>
+
+        <!-- Quick Links -->
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="/simple-auth" target="_blank" style="color: #0284c7; text-decoration: none;">
+              📝 简化测试页
+            </a>
+            <a href="/explore" target="_blank" style="color: #0284c7; text-decoration: none;">
+              📖 exploration
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const users = {
+            demo: {
+                id: '1',
+                email: 'demo@philosophy.com',
+                password: 'demo123',
+                displayName: '演示用户',
+            },
+            guest: {
+                id: '2',
+                email: 'guest@philosophy.com',
+                password: 'guest123',
+                displayName: '访客用户',
+            }
+        };
+
+        function loginAs(userType) {
+            const user = users[userType];
+
+            // 更新表单
+            document.getElementById('email').value = user.email;
+            document.getElementById('password').value = user.password;
+
+            // 模拟登录
+            const resultDiv = document.getElementById('login-result');
+            resultDiv.innerHTML = `
+                <div class="success-message">
+                    🎉 登录成功！
+                    <p>欢迎回来，${user.displayName}！</p>
+                    <p>你的会话已保存</p>
+                </div>
+            `;
+
+            // 存储用户信息
+            localStorage.setItem('philosophy-user', JSON.stringify(user));
+
+            // 更新页面
+            if (user.id === '1') {
+              setTimeout(() => {
+                alert('欢迎登录演示账号！');
+                window.location.href = '/explore';
+              }, 1000);
+            } else {
+              setTimeout(() => {
+                alert('欢迎访客账号！');
+                window.location.href = '/explore';
+              }, 1000);
+            }
+        }
+
+        // 页面加载时检查是否已登录
+        window.onload = function() {
+            const savedUser = localStorage.getItem('philosophy-user');
+            if (savedUser) {
+                const user = JSON.parse(savedUser);
+                setUserToken(user.email);
+
+                // 已登录，跳转到主页
+                setTimeout(() => {
+                  window.location.href = '/explore';
+                }, 500);
+            }
+        }
+
+        function setUserToken(email) {
+          const tokenDiv = document.getElementById('user-status');
+        }
+
+        // 创建用户状态显示
+        const statusDiv = document.createElement('div');
+        statusDiv.id = 'user-status';
+        statusDiv.style.css = 'position: absolute; top: 20px; right: 20px; padding: 10px; background: rgba(255,255,255,0.9); border-radius: 8px; font-size: 12px;';
+        document.body.appendChild(statusDiv);
+        </script>
+</body>
+</html>

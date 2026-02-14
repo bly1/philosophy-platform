@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哲学与精神分析学习平台 - 在线版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-600: #0284c7;
+            --primary-700: #0369a1;
+            --sage-600: #738c69;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-900: #111827;
+            --gray-700: #374151;
+            --gray-600: #4b5563;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-900);
+            background: linear-gradient(to bottom, #f0f9ff, #ffffff);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-600);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-600);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-600), var(--sage-600));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-600);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-700);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(2, 132, 199, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--gray-700);
+            border: 2px solid #e5e7eb;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary-600);
+            color: var(--primary-600);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            border-radius: 12px;
+            background: var(--gray-50);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary-100);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            color: var(--gray-600);
+        }
+
+        /* Philosophers Section */
+        .philosophers {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray-600);
+            margin-bottom: 3rem;
+        }
+
+        .philosophers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .philosopher-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .philosopher-card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+        }
+
+        .philosopher-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin: 0 auto 1rem;
+        }
+
+        .philosopher-card h3 {
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .philosopher-card .era {
+            text-align: center;
+            color: var(--gray-600);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Topics Section */
+        .topics {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .topic-card {
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s;
+        }
+
+        .topic-card:hover {
+            border-color: var(--primary-600);
+            background: var(--primary-50);
+        }
+
+        .topic-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .topic-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .topic-card p {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+        }
+
+        /* Content Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--gray-600);
+        }
+
+        .close-modal:hover {
+            color: var(--gray-900);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--gray-900);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-400);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .features-grid,
+            .philosophers-grid,
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">🧠 哲学与精神分析</div>
+            <ul class="nav-links">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#philosophers">哲学家</a></li>
+                <li><a href="#topics">探索主题</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>探索思想的深度之旅</h1>
+                <p在这里，哲学与精神分析相遇，带你深入理解人类意识的奥秘。通过系统化的学习路径，掌握核心概念，开启心智探索之旅。</p>
+                <div class="buttons">
+                    <a href="#topics" class="btn btn-primary">开始探索</a>
+                    <a href="#philosophers" class="btn btn-secondary">了解哲学家</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3>系统化内容</h3>
+                        <p>从古希腊哲学到现代精神分析，构建完整的知识体系</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💡</div>
+                        <h3>深度思辨</h3>
+                        <p>通过引导性问题和案例，培养批判性思维能力</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👥</div>
+                        <h3>社区互动</h3>
+                        <p>与志同道合的学习者交流，获得导师专业指导</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="philosophers" class="philosophers">
+            <div class="container">
+                <h2 class="section-title">西方哲学家</h2>
+                <p class="section-subtitle穿越时空，与伟大的思想对话</p>
+                <div class="philosophers-grid">
+                    <div class="philosopher-card" onclick="showPhilosopher('socrates')">
+                        <div class="philosopher-avatar">苏</div>
+                        <h3>苏格拉底</h3>
+                        <p class="era">古希腊 · 公元前470-399年</p>
+                        <p>西方哲学的奠基人，以诘问法和&ldquo;认识你自己&rdquo;闻名</p>
+                    </div>
+                    <div class="philosopher-card" onclick="showPhilosopher('plato')">
+                        <div class="philosopher-avatar">柏</div>
+                        <h3>柏拉图</h3>
+                        <p class="era">古希腊 · 公元前427-347年</p>
+                        <p>苏格拉底的学生，提出理念论和理想国</p>
+                    </div>
+                    <div class="philosopher-card" onclick="showPhilosopher('descartes')">
+                        <div class="philosopher-avatar">笛</div>
+                        <h3>笛卡尔</h3>
+                        <p class="era">近代 · 1596-1650年</p>
+                        <p>现代哲学之父，&ldquo;我思故我在&rdquo;</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="topics" class="topics">
+            <div class="container">
+                <h2 class="section-title">探索核心主题</h2>
+                <p class="section-subtitle深入贯穿哲学与精神分析的核心概念</p>
+                <div class="topics-grid">
+                    <div class="topic-card">
+                        <div class="topic-icon">🧠</div>
+                        <h3>意识之谜</h3>
+                        <p>从笛卡尔到现代认知科学</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-icon">🌊</div>
+                        <h3>无意识的领域</h3>
+                        <p>弗洛伊德、荣格和拉康的理论</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-icon">🌟</div>
+                        <h3>存在的意义</h3>
+                        <p>海德格尔到萨特的存在主义</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-icon">💝</div>
+                        <h3>欲望的哲学</h3>
+                        <p>柏拉图的爱欲说与拉康理论</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-icon">⚖️</div>
+                        <h3>道德与良知</h3>
+                        <p>从康德到现代道德心理学</p>
+                    </div>
+                    <div class="topic-card">
+                        <div class="topic-icon">🔍</div>
+                        <h3>真理的本质</h3>
+                        <p>认识论与精神分析的理解</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>哲学与精神分析学习平台</h3>
+                <p>探索人类思想的最深处</p>
+                <ul class="footer-links">
+                    <li><a href="#home">关于我们</a></li>
+                    <li><a href="#philosophers">学习路径</a></li>
+                    <li><a href="#topics">联系</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="container">
+            <div class="modal-content">
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+                <div id="modal-body">
+                    <!-- Content will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const philosopherData = {
+            socrates: {
+                name: '苏格拉底',
+                name_en: 'Socrates',
+                era: '古希腊',
+                years: '公元前470-399年',
+                content: `
+                    <h2>苏格拉底 (Socrates)</h2>
+                    <p><strong>时代：</strong>古希腊 · 公元前470-399年</p>
+
+                    <h3>生平简介</h3>
+                    <p>苏格拉底是西方哲学的奠基人之一，被誉为"哲学的化身"。他的一生都在雅典的街头广场上与人对话，通过不断追问的方式引导人们思考。</p>
+
+                    <h3>核心思想</h3>
+                    <ul>
+                        <li><strong>认识你自己</strong> - 德尔斐神庙的箴言，苏格拉底将其发展为哲学方法</li>
+                        <li><strong>苏格拉底法</strong> - 通过连续提问揭示概念本质的对话方法</li>
+                        <li><strong>美德即知识</strong> - 无人自愿作恶，恶行源于无知</li>
+                    </ul>
+
+                    <h3>主要影响</h3>
+                    <p>苏格拉底的影响超越了时代，他开创了西方哲学的理性主义传统。"苏格拉底式对话"至今仍是批判性思维训练的重要工具。</p>
+                `
+            },
+            plato: {
+                name: '柏拉图',
+                name_en: 'Plato',
+                era: '古希腊',
+                years: '公元前427-347年',
+                content: `
+                    <h2>柏拉图 (Plato)</h2>
+                    <p><strong>时代：</strong>古希腊 · 公元前427-347年</p>
+
+                    <h3>生平简介</h3>
+                    <p>柏拉图是苏格拉底的学生，亚里士多德的老师。他在雅典建立了学园，被认为是西方第一所高等教育机构。他写了约30篇对话录，涵盖哲学各个领域。</p>
+
+                    <h3>核心思想</h3>
+                    <ul>
+                        <li><strong>理念论</strong> - 存在永恒不变的理念世界，具体事物只是理念的不完美摹本</li>
+                        <li><strong>洞穴寓言</strong> - 人类对真实世界无知的隐喻</li>
+                        <li><strong>哲学王</strong> - 理想国中由真正理解理念的哲学家来统治</li>
+                    </ul>
+
+                    <h3>主要著作</h3>
+                    <p>《理想国》、《会饮篇》、《斐德罗篇》、《斐多篇》等，其中《理想国》是其最著名的作品。</p>
+                `
+            },
+            descartes: {
+                name: '笛卡尔',
+                name_en: 'René Descartes',
+                era: '近代早期',
+                years: '1596-1650年',
+                content: `
+                    <h2>笛卡尔 (René Descartes)</h2>
+                    <p><strong>时代：</strong>法国 · 1596-1650年</p>
+
+                    <h3>生平简介</h3>
+                    <p>笛卡尔是法国哲学家、数学家、科学家，被誉为"现代哲学之父"。他开创了理性主义传统，还是解析几何的创始人。</p>
+
+                    <h3>核心思想</h3>
+                    <ul>
+                        <li><strong>我思故我在</strong> - 通过普遍怀疑最终确定的哲学基础</li>
+                        <li><strong>身心二元论</strong> - 人由思想（心灵）和广延（身体）两种不同实体组成</li>
+                        <li><strong>理性主义</strong> - 强调理性是获得真知的主要途径</li>
+                    </ul>
+
+                    <h3>科学贡献</h3>
+                    <p>笛卡尔坐标系将代数和几何结合，创立了解析几何，对数学发展产生深远影响。</p>
+                `
+            }
+        };
+
+        function showPhilosopher(id) {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modal-body');
+            const philosopher = philosopherData[id];
+
+            if (philosopher) {
+                modalBody.innerHTML = philosopher.content;
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

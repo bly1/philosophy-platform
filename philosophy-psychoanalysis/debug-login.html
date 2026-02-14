@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录问题诊断</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #374151;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #1f2937b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #111827;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .success {
+            color: #059669;
+        }
+        .error {
+            color: #dc2626;
+        }
+        .debug-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e0e7ff;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #0d47a1a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>登录问题诊断工具</h1>
+
+        <div class="form-group">
+            <label>邮箱：</label>
+            <input type="email" id="email" value="demo@philosophy.com">
+        </div>
+
+        <div class="form-group">
+            <label>密码：</label>
+            <input type="password" id="password" value="demo123">
+        </div>
+
+        <button onclick="testLogin()">测试登录</button>
+
+        <div id="result"></div>
+
+        <div class="debug-info">
+            <h3>调试信息：</h3>
+            <p>1. 检查端口：应该访问 <strong>localhost:3003</strong></p>
+            <p>2. 按F12打开开发者工具</p>
+            <p>3. 查看 Console 选项卡日志</p>
+            <p>4. 尝试登录时是否有错误</p>
+        </div>
+
+        <div class="debug-info">
+            <h3>手动测试 API：</h3>
+            <p>复制以下命令到浏览器控制台测试：</p>
+            <pre><code>
+fetch('/api/auth', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    email: 'demo@philosophy.com',
+    password: 'demo123'
+  })
+})
+.then(response => response.json())
+.then(data => console.log('Success:', data))
+.catch(error => console.error('Error:', error)
+            </code></pre>
+        </div>
+
+        <div class="debug-info">
+            <h3>手动测试登录页：</h3>
+            <p>在浏览器控制台中运行：</p>
+            <pre><code>
+// 1. 填写表单
+document.querySelector('#email').value = 'demo@philosophy.com';
+document.querySelector('#password').value = 'demo123';
+
+// 2. 触发点击事件
+document.querySelector('button').dispatchEvent(new Event('click'));
+
+// 3. 添加事件监听器
+document.querySelector('button').addEventListener('click', async function() {
+  const email = document.querySelector('#email').value;
+  const password = document.querySelector('#password').value;
+
+  try {
+    const response = await fetch('/api/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await response.json();
+    console.log('登录成功:', data);
+    alert('登录成功！');
+  } catch (error) {
+    console.error('登录失败:', error);
+    alert('登录失败：' + error.message);
+  }
+});
+            </code></pre>
+        </div>
+
+        <div class="debug-info">
+            <h3>浏览器检查清单：</h3>
+            <ul>
+                <li>[ ] 页面能否打开？</li>
+                <li>[ ] 简单是否显示？</li>
+                <li>[ ] 按钮能点击吗？</li>
+                <li>[ ] 点击后有反应吗？</li>
+                <li>[ ] 控制台有输出吗？</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        async function testLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const resultDiv = document.getElementById('result');
+
+            resultDiv.innerHTML = '⏳ 测试中...';
+
+            // 直接显示登录结果，不使用 fetch
+            resultDiv.innerHTML = `
+                <p>测试结果：</p>
+                <p>邮箱: ${email}</p>
+                <p>密码: ${password}</p>
+                <p><strong>如果看到这行文字，说明页面和表单都正常！</strong></p>
+                <p><strong>但点击没反应？可能是：</strong></p>
+                <ul style="text-align: left; margin-left: 20px;">
+                    <li>JavaScript 错误</li>
+                    <li>事件绑定向问题</li>
+                    <li>网络请求被阻止</li>
+                    <li>表单验证阻止提交</li>
+                </ul>
+            `;
+
+            // 尝试直接调用 fetch
+            try {
+                const response = await fetch('/api/auth', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password }),
+                });
+
+                const data = await response.json();
+
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = `
+                    <div class="success">
+                        ✅ API 调用成功！
+                        <br/>用户ID: ${data.user.id}
+                        <br/>显示名: ${data.user.displayName}
+                        <br/>邮箱: ${data.user.email}
+                        <br><strong>这证明：</strong>服务器、API、数据库都正常
+                    </div>
+                `;
+
+                // 更新浏览器标题
+                document.title = '✅ 登录已验证';
+
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        ❌ 错误：${error.message}
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

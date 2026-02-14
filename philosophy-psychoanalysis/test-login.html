@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录测试</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+        .success {
+            color: #10b981;
+            background-color: #f0fdf4;
+        }
+        .error {
+            color: #ef4444;
+            background-color: #fef2f2;
+        }
+        button {
+            padding: 10px 20px;
+            background: #0284c7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0369a1;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔐 认证系统测试</h1>
+
+    <div class="test-section">
+        <h2>1. 测试 API 端点</h2>
+        <button onclick="testValidLogin()">测试有效登录</button>
+        <button onclick="testInvalidLogin()">测试无效登录</button>
+        <div id="api-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. 模拟登录流程</h2>
+        <input type="email" id="email" placeholder="demo@philosophy.com" style="width: 100%; padding: 8px; margin: 5px 0;">
+        <input type="password" id="password" placeholder="demo123" style="width: 100%; padding: 8px; margin: 5px 0;">
+        <button onclick="simulateLogin()">登录</button>
+        <div id="login-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. 访问页面</h2>
+        <a href="http://localhost:3001/auth/login" target="_blank">打开登录页面</a>
+        <a href="http://localhost:3001" target="_blank">打开主页（应该跳转到登录）</a>
+    </div>
+
+    <script>
+        async function testValidLogin() {
+            const result = document.getElementById('api-result');
+            result.innerHTML = '<p>测试中...</p>';
+
+            try {
+                const response = await fetch('http://localhost:3001/api/auth', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: 'demo@philosophy.com',
+                        password: 'demo123'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    result.innerHTML = `
+                        <div class="success">
+                            <h3>✅ 登录成功！</h3>
+                            <pre>${JSON.stringify(data, null, 2)}</pre>
+                        </div>
+                    `;
+                } else {
+                    result.innerHTML = `
+                        <div class="error">
+                            <h3>❌ 登录失败</h3>
+                            <p>${data.error}</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                result.innerHTML = `
+                    <div class="error">
+                        <h3>❌ 请求错误</h3>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        async function testInvalidLogin() {
+            const result = document.getElementById('api-result');
+            result.innerHTML = '<p>测试中...</p>';
+
+            try {
+                const response = await fetch('http://localhost:3001/api/auth', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: 'wrong@email.com',
+                        password: 'wrong123'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!data.success) {
+                    result.innerHTML = `
+                        <div class="success">
+                            <h3>✅ 错误处理正常！</h3>
+                            <p>${data.error}</p>
+                        </div>
+                    `;
+                } else {
+                    result.innerHTML = `
+                        <div class="error">
+                            <h3>❌ 应该失败但成功了</h3>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                result.innerHTML = `
+                    <div class="error">
+                        <h3>❌ 请求错误</h3>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        async function simulateLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const result = document.getElementById('login-result');
+
+            if (!email || !password) {
+                result.innerHTML = '<p class="error">请输入邮箱和密码</p>';
+                return;
+            }
+
+            result.innerHTML = '<p>登录中...</p>';
+
+            try {
+                const response = await fetch('http://localhost:3001/api/auth', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // 存储用户信息到 localStorage
+                    localStorage.setItem('user', JSON.stringify(data.user));
+
+                    result.innerHTML = `
+                        <div class="success">
+                            <h3>✅ 登录成功！</h3>
+                            <p>用户: ${data.user.displayName}</p>
+                            <p>邮箱: ${data.user.email}</p>
+                            <p>用户信息已存储到 localStorage</p>
+                            <button onclick="logout()">退出登录</button>
+                        </div>
+                    `;
+                } else {
+                    result.innerHTML = `
+                        <div class="error">
+                            <h3>❌ 登录失败</h3>
+                            <p>${data.error}</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                result.innerHTML = `
+                    <div class="error">
+                        <h3>❌ 请求错误</h3>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('user');
+            document.getElementById('login-result').innerHTML = '<p>已退出登录</p>';
+        }
+
+        // 页面加载时检查登录状态
+        window.onload = function() {
+            const savedUser = localStorage.getItem('user');
+            if (savedUser) {
+                document.getElementById('login-result').innerHTML = `
+                    <div class="success">
+                        <h3>👋 欢迎，${JSON.parse(savedUser).displayName}！</h3>
+                        <p>您已登录</p>
+                        <button onclick="logout()">退出登录</button>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
