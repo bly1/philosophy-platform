@@ -1244,51 +1244,51 @@
                     <p class="section-subtitle">精选高质量的学习材料</p>
                 </div>
                 <div class="resources-grid">
-                    <div class="resource-card">
+                    <div class="resource-card" onclick="showResource('history')">
                         <span class="resource-type">课程</span>
                         <h3>西方哲学史</h3>
                         <p>从古希腊到现代的完整哲学史课程，包含重要哲学家及其思想的详细介绍。</p>
-                        <a href="#" class="resource-link">
+                        <a href="javascript:void(0)" class="resource-link">
                             开始学习 <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
-                    <div class="resource-card">
+                    <div class="resource-card" onclick="showResource('classics')">
                         <span class="resource-type">原典</span>
                         <h3>哲学经典选读</h3>
                         <p>精选柏拉图《理想国》、笛卡尔《沉思录》等经典著作的核心章节解读。</p>
-                        <a href="#" class="resource-link">
+                        <a href="javascript:void(0)" class="resource-link">
                             阅读原文 <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
-                    <div class="resource-card">
+                    <div class="resource-card" onclick="showResource('videos')">
                         <span class="resource-type">视频</span>
                         <h3>哲学讲座系列</h3>
                         <p>知名教授的哲学讲座视频，深入浅出地讲解复杂的哲学概念。</p>
-                        <a href="#" class="resource-link">
+                        <a href="javascript:void(0)" class="resource-link">
                             观看视频 <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
-                    <div class="resource-card">
+                    <div class="resource-card" onclick="showResource('dictionary')">
                         <span class="resource-type">工具</span>
                         <h3>概念词典</h3>
                         <p>收录500+哲学核心概念，提供清晰的定义和相关哲学家信息。</p>
-                        <a href="#" class="resource-link">
+                        <a href="javascript:void(0)" class="resource-link">
                             查询概念 <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
-                    <div class="resource-card">
+                    <div class="resource-card" onclick="showResource('exercises')">
                         <span class="resource-type">练习</span>
                         <h3>思考训练</h3>
                         <p>通过批判性思维练习和哲学问题，培养独立思考能力。</p>
-                        <a href="#" class="resource-link">
+                        <a href="javascript:void(0)" class="resource-link">
                             开始练习 <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
-                    <div class="resource-card">
+                    <div class="resource-card" onclick="showResource('community')">
                         <span class="resource-type">社区</span>
                         <h3>学习小组</h3>
                         <p>加入哲学讨论组，与志同道合的学习者交流心得。</p>
-                        <a href="#" class="resource-link">
+                        <a href="javascript:void(0)" class="resource-link">
                             加入讨论 <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
@@ -2101,6 +2101,246 @@
         // Learning functions
         function startLearning() {
             toggleChat();
+        }
+
+        // Resource data
+        const resourceData = {
+            history: {
+                title: '西方哲学史',
+                content: `
+                    <h3>课程大纲</h3>
+                    <div style="margin: 20px 0;">
+                        <h4 style="color: var(--primary-600); margin: 15px 0 10px;">第一部分：古希腊哲学</h4>
+                        <ul>
+                            <li>前苏格拉底时期：泰勒斯、赫拉克利特、巴门尼德</li>
+                            <li>古典时期：苏格拉底、柏拉图、亚里士多德</li>
+                            <li>希腊化时期：斯多葛学派、伊壁鸠鲁学派</li>
+                        </ul>
+                        
+                        <h4 style="color: var(--primary-600); margin: 15px 0 10px;">第二部分：中世纪哲学</h4>
+                        <ul>
+                            <li>奥古斯丁：信仰与理性</li>
+                            <li>托马斯·阿奎那：经院哲学</li>
+                            <li>唯名论与唯实论之争</li>
+                        </ul>
+                        
+                        <h4 style="color: var(--primary-600); margin: 15px 0 10px;">第三部分：近代哲学</h4>
+                        <ul>
+                            <li>笛卡尔与理性主义</li>
+                            <li>洛克、休谟与经验主义</li>
+                            <li>康德的批判哲学</li>
+                            <li>黑格尔的绝对唯心主义</li>
+                        </ul>
+                        
+                        <h4 style="color: var(--primary-600); margin: 15px 0 10px;">第四部分：现代哲学</h4>
+                        <ul>
+                            <li>尼采与存在主义</li>
+                            <li>现象学：胡塞尔、海德格尔</li>
+                            <li>分析哲学：罗素、维特根斯坦</li>
+                            <li>后现代主义：福柯、德里达</li>
+                        </ul>
+                    </div>
+                    <p style="background: var(--gray-100); padding: 15px; border-radius: 8px; margin-top: 20px;">
+                        <strong>学习建议：</strong>建议按时间顺序学习，理解哲学思想的历史演变脉络。
+                    </p>
+                `
+            },
+            classics: {
+                title: '哲学经典选读',
+                content: `
+                    <h3>必读经典</h3>
+                    <div style="margin: 20px 0;">
+                        <div style="background: var(--gray-50); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: var(--primary-600);">柏拉图《理想国》</h4>
+                            <p>核心章节：洞穴寓言（第七卷）</p>
+                            <p style="font-style: italic; color: var(--gray-600); margin-top: 10px;">
+                                "想象一群人从小就被锁在洞穴深处，他们只能看到墙上的影子..."
+                            </p>
+                        </div>
+                        
+                        <div style="background: var(--gray-50); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: var(--primary-600);">笛卡尔《第一哲学沉思录》</h4>
+                            <p>核心章节：第二沉思（我思故我在）</p>
+                            <p style="font-style: italic; color: var(--gray-600); margin-top: 10px;">
+                                "我注意到，当我试图认为一切都是虚假的时候，这个在思考的'我'必然是某种东西..."
+                            </p>
+                        </div>
+                        
+                        <div style="background: var(--gray-50); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: var(--primary-600);">康德《纯粹理性批判》</h4>
+                            <p>核心章节：先验感性论</p>
+                            <p style="font-style: italic; color: var(--gray-600); margin-top: 10px;">
+                                "我们的一切知识都从经验开始，但并非都源于经验。"
+                            </p>
+                        </div>
+                        
+                        <div style="background: var(--gray-50); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: var(--primary-600);">尼采《查拉图斯特拉如是说》</h4>
+                            <p>核心章节：论三种变形</p>
+                            <p style="font-style: italic; color: var(--gray-600); margin-top: 10px;">
+                                "我要告诉你们精神的三种变形：精神如何变成骆驼，骆驼如何变成狮子，狮子如何变成孩子。"
+                            </p>
+                        </div>
+                    </div>
+                `
+            },
+            videos: {
+                title: '哲学讲座系列',
+                content: `
+                    <h3>推荐讲座</h3>
+                    <div style="margin: 20px 0;">
+                        <div style="border: 1px solid var(--gray-200); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: var(--primary-600);">🎬 西方哲学史导论</h4>
+                            <p>讲师：知名哲学教授</p>
+                            <p>时长：12集，每集45分钟</p>
+                            <p style="margin-top: 10px;">从古希腊到现代，系统介绍西方哲学发展脉络</p>
+                        </div>
+                        
+                        <div style="border: 1px solid var(--gray-200); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: var(--primary-600);">🎬 精神分析入门</h4>
+                            <p>讲师：拉康派分析师</p>
+                            <p>时长：8集，每集30分钟</p>
+                            <p style="margin-top: 10px;">深入浅出讲解弗洛伊德、拉康的核心概念</p>
+                        </div>
+                        
+                        <div style="border: 1px solid var(--gray-200); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: var(--primary-600);">🎬 存在主义哲学</h4>
+                            <p>讲师：现象学研究者</p>
+                            <p>时长：10集，每集40分钟</p>
+                            <p style="margin-top: 10px;">海德格尔、萨特、加缪的存在主义思想解读</p>
+                        </div>
+                    </div>
+                    <p style="background: #fff3cd; padding: 15px; border-radius: 8px;">
+                        <strong>提示：</strong>视频资源需要网络连接，建议在WiFi环境下观看。
+                    </p>
+                `
+            },
+            dictionary: {
+                title: '概念词典',
+                content: `
+                    <h3>核心概念查询</h3>
+                    <div style="margin: 20px 0;">
+                        <input type="text" placeholder="输入概念名称搜索..." style="width: 100%; padding: 12px; border: 1px solid var(--gray-300); border-radius: 8px; margin-bottom: 20px;">
+                        
+                        <div style="display: grid; gap: 15px;">
+                            <div style="background: var(--gray-50); padding: 15px; border-radius: 8px;">
+                                <h4 style="color: var(--primary-600);">本体论 (Ontology)</h4>
+                                <p>研究存在的本质和结构的哲学分支。探讨"什么是真正存在的"这一根本问题。</p>
+                                <p style="color: var(--gray-600); font-size: 0.9rem; margin-top: 5px;">相关哲学家：亚里士多德、海德格尔</p>
+                            </div>
+                            
+                            <div style="background: var(--gray-50); padding: 15px; border-radius: 8px;">
+                                <h4 style="color: var(--primary-600);">辩证法 (Dialectic)</h4>
+                                <p>通过对话和辩论探求真理的方法。黑格尔发展出正-反-合的三段式辩证法。</p>
+                                <p style="color: var(--gray-600); font-size: 0.9rem; margin-top: 5px;">相关哲学家：苏格拉底、黑格尔、马克思</p>
+                            </div>
+                            
+                            <div style="background: var(--gray-50); padding: 15px; border-radius: 8px;">
+                                <h4 style="color: var(--primary-600);">无意识 (Unconscious)</h4>
+                                <p>弗洛伊德提出的概念，指那些被压抑、无法直接进入意识的心理内容。拉康将其与语言结构联系起来。</p>
+                                <p style="color: var(--gray-600); font-size: 0.9rem; margin-top: 5px;">相关哲学家：弗洛伊德、拉康、荣格</p>
+                            </div>
+                            
+                            <div style="background: var(--gray-50); padding: 15px; border-radius: 8px;">
+                                <h4 style="color: var(--primary-600);">大他者 (Big Other)</h4>
+                                <p>拉康派精神分析的核心概念，指象征秩序、社会法则、语言结构。大他者是主体欲望的真正对象。</p>
+                                <p style="color: var(--gray-600); font-size: 0.9rem; margin-top: 5px;">相关哲学家：拉康</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            exercises: {
+                title: '思考训练',
+                content: `
+                    <h3>批判性思维练习</h3>
+                    <div style="margin: 20px 0;">
+                        <div style="background: var(--primary-50); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <h4 style="color: var(--primary-600);">练习一：苏格拉底式诘问</h4>
+                            <p><strong>问题：</strong>什么是"正义"？</p>
+                            <p style="margin-top: 10px;"><strong>引导问题：</strong></p>
+                            <ul style="margin-top: 10px;">
+                                <li>你能给出一个正义的定义吗？</li>
+                                <li>这个定义在所有情况下都成立吗？</li>
+                                <li>有没有反例可以挑战这个定义？</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: var(--sage-50); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <h4 style="color: var(--sage-600);">练习二：思想实验</h4>
+                            <p><strong>场景：</strong>如果你能永远幸福地生活在虚拟世界中，你会选择这样做吗？</p>
+                            <p style="margin-top: 10px;"><strong>思考要点：</strong></p>
+                            <ul style="margin-top: 10px;">
+                                <li>幸福是否是人生的唯一价值？</li>
+                                <li>"真实"与"虚幻"的区别重要吗？</li>
+                                <li>这个选择涉及哪些哲学问题？</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: var(--gray-100); padding: 20px; border-radius: 8px;">
+                            <h4 style="color: var(--gray-700);">练习三：概念分析</h4>
+                            <p><strong>任务：</strong>分析"自由"这个概念</p>
+                            <p style="margin-top: 10px;"><strong>步骤：</strong></p>
+                            <ol style="margin-top: 10px;">
+                                <li>列出"自由"的不同含义</li>
+                                <li>区分"消极自由"和"积极自由"</li>
+                                <li>思考自由与责任的关系</li>
+                                <li>讨论自由的边界在哪里</li>
+                            </ol>
+                        </div>
+                    </div>
+                `
+            },
+            community: {
+                title: '学习小组',
+                content: `
+                    <h3>加入学习社区</h3>
+                    <div style="margin: 20px 0;">
+                        <div style="background: linear-gradient(135deg, var(--primary-50), var(--sage-50)); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <h4 style="color: var(--primary-600);">📖 读书会</h4>
+                            <p>每月共读一本哲学经典</p>
+                            <p style="margin-top: 10px;"><strong>本月书目：</strong>《存在与时间》导论部分</p>
+                            <p style="color: var(--gray-600); margin-top: 5px;">讨论时间：每周六晚8点</p>
+                        </div>
+                        
+                        <div style="background: linear-gradient(135deg, var(--sage-50), var(--primary-50)); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <h4 style="color: var(--sage-600);">💬 主题讨论组</h4>
+                            <p>针对特定主题深入探讨</p>
+                            <ul style="margin-top: 10px;">
+                                <li>精神分析讨论组</li>
+                                <li>存在主义读书会</li>
+                                <li>分析哲学研讨班</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: var(--gray-100); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <h4 style="color: var(--gray-700);">🎓 导师答疑</h4>
+                            <p>每周邀请哲学教授在线答疑</p>
+                            <p style="margin-top: 10px;">提交你的问题，获得专业解答</p>
+                        </div>
+                        
+                        <div style="text-align: center; padding: 20px; background: var(--primary-600); color: white; border-radius: 8px;">
+                            <p style="font-size: 1.1rem; margin-bottom: 10px;">准备好加入了吗？</p>
+                            <p style="font-size: 0.9rem; opacity: 0.9;">使用AI对话功能开始你的哲学探索之旅</p>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        function showResource(id) {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modal-body');
+            const resource = resourceData[id];
+
+            if (resource) {
+                modalBody.innerHTML = `
+                    <h2>${resource.title}</h2>
+                    ${resource.content}
+                `;
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
         }
 
         function showGuide() {
