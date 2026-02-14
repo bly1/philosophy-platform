@@ -3022,22 +3022,6 @@
                     </div>
                     
                     </div>
-                    
-                    <script>
-                    function filterConcepts() {
-                        const input = document.getElementById('conceptSearch').value.toLowerCase();
-                        const items = document.querySelectorAll('.concept-item');
-                        items.forEach(item => {
-                            const keywords = item.getAttribute('data-keywords').toLowerCase();
-                            const text = item.textContent.toLowerCase();
-                            if (keywords.includes(input) || text.includes(input)) {
-                                item.style.display = 'block';
-                            } else {
-                                item.style.display = 'none';
-                            }
-                        });
-                    }
-                    </script>
                 `
             },
             exercises: {
@@ -4227,6 +4211,23 @@ ${philosophyKnowledge.philosophicalQuestions[Math.floor(Math.random() * philosop
                 document.body.classList.add('dark-mode');
                 document.getElementById('themeIcon').className = 'fas fa-sun';
             }
+        }
+        
+        // Concept search filter
+        function filterConcepts() {
+            const input = document.getElementById('conceptSearch');
+            if (!input) return;
+            const filter = input.value.toLowerCase();
+            const items = document.querySelectorAll('.concept-item');
+            items.forEach(item => {
+                const keywords = item.getAttribute('data-keywords') || '';
+                const text = item.textContent.toLowerCase();
+                if (keywords.toLowerCase().includes(filter) || text.includes(filter)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
         }
     </script>
 </body>
