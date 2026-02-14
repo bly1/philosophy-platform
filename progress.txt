@@ -1,5 +1,42 @@
 # Progress Log
 
+## 2026-02-14 - Deployment Configuration
+
+### What was done:
+- Created production-ready next.config.ts with security headers and image configuration
+- Created vercel.json for Vercel deployment configuration:
+  - Set function timeouts (60s regular, 300s for generation endpoints)
+  - Configured regions (sin1 for Asia)
+  - Set up environment variables mapping
+  - Added cache headers for API routes
+- Updated package.json with deployment scripts:
+  - deploy:preview for preview deployments
+  - deploy:prod for production deployments
+  - type-check for TypeScript validation
+- Created comprehensive DEPLOYMENT.md documentation:
+  - Step-by-step deployment guide
+  - Environment variable setup
+  - Post-deployment checklist
+  - Monitoring and troubleshooting
+- Added GitHub Actions CI/CD pipeline (.github/workflows/ci.yml):
+  - Linting on all PRs
+  - Type checking
+  - Build verification
+  - Automatic preview deployments
+
+### Testing:
+- npm run lint passed
+- npm run type-check passed
+- npm run build successful with production configuration
+
+### Notes:
+- Deployment ready for Vercel platform
+- Environment variables must be configured in Vercel dashboard
+- CI/CD pipeline will automatically deploy previews for PRs
+- All 31 tasks remain completed - this is deployment preparation
+
+---
+
 ## 2026-02-10 - Bug Fix: 视频/图片生成卡在"生成中"状态
 
 ### 问题描述:
