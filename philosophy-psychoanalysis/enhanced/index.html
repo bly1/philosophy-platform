@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="哲学与精神分析学习平台 - 探索西方哲学史，深入理解存在主义、现象学、精神分析核心概念，与AI哲学导师对话">
+    <meta name="keywords" content="哲学,精神分析,存在主义,现象学,拉康,弗洛伊德,海德格尔,尼采,未明子">
+    <meta property="og:title" content="哲学与精神分析学习平台">
+    <meta property="og:description" content="探索思想的深度之旅">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <title>哲学与精神分析学习平台 - 增强版</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <span>哲学与精神分析</span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#features">特色功能</a></li>
+                <li><a href="#philosophers">哲学家</a></li>
+                <li><a href="#topics">探索主题</a></li>
+                <li><a href="#resources">学习资源</a></li>
+                <li><a href="#videos">视频课程</a></li>
+            </ul>
+            <div class="search-box">
+                <input type="text" placeholder="搜索哲学家、概念..." id="searchInput">
+                <i class="fas fa-search"></i>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="切换主题">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="菜单">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container hero-content">
+                <h1>探索思想的深度之旅</h1>
+                <p>在这里，哲学与精神分析相遇，带你深入理解人类意识的奥秘。与历史上的伟大哲学家对话，开启心智探索之旅。</p>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">哲学家</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">200+</div>
+                        <div class="stat-label">核心概念</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">学习资源</div>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button class="btn btn-primary" onclick="startLearning()">
+                        <i class="fas fa-play-circle"></i> 开始探索
+                    </button>
+                    <button class="btn btn-secondary" onclick="showGuide()">
+                        <i class="fas fa-map"></i> 学习指南
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="quick-access">
+            <div class="container">
+                <div class="quick-links">
+                    <a href="#" class="quick-link" onclick="showQuickTopic('consciousness')">
+                        <i class="fas fa-brain"></i> 意识研究
+                    </a>
+                    <a href="#" class="quick-link" onclick="showQuickTopic('ethics')">
+                        <i class="fas fa-balance-scale"></i> 伦理学
+                    </a>
+                    <a href="#" class="quick-link" onclick="showQuickTopic('epistemology')">
+                        <i class="fas fa-search"></i> 认识论
+                    </a>
+                    <a href="#" class="quick-link" onclick="showQuickTopic('psychoanalysis')">
+                        <i class="fas fa-user-md"></i> 精神分析
+                    </a>
+                    <a href="#" class="quick-link" onclick="showQuickTopic('existentialism')">
+                        <i class="fas fa-atom"></i> 存在主义
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">平台特色</h2>
+                    <p class="section-subtitle">全方位的学习体验，让哲学触手可及</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>AI哲学家对话</h3>
+                        <p>与苏格拉底、尼采、弗洛伊德等哲学家进行深度对话，体验他们独特的思维方式。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>系统化课程</h3>
+                        <p>从基础概念到高级理论，循序渐进的学习路径。每个主题都配有详细的学习指南。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>视频课程</h3>
+                        <p>精选B站未明子等优质UP主的哲学视频，深入浅出讲解复杂概念。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-book-reader"></i>
+                        </div>
+                        <h3>丰富资源</h3>
+                        <p>精选哲学原典、现代解读、视频讲座等多种学习材料。支持中英双语对照学习。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <h3>暗色模式</h3>
+                        <p>护眼的暗色主题，适合夜间学习和长时间阅读。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>智能搜索</h3>
+                        <p>快速搜索哲学家、概念、主题，一键直达你想了解的内容。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="philosophers" id="philosophers">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">哲学家</h2>
+                    <p class="section-subtitle">点击与哲学家对话，体验他们的思维方式</p>
+                </div>
+                <div class="philosophers-grid" id="philosophersGrid">
+                </div>
+            </div>
+        </section>
+
+        <section class="topics" id="topics">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">探索核心主题</h2>
+                    <p class="section-subtitle">深入贯穿哲学与精神分析的核心概念</p>
+                </div>
+                <div class="topics-grid" id="topicsGrid">
+                </div>
+            </div>
+        </section>
+
+        <section class="resources" id="resources">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">学习资源</h2>
+                    <p class="section-subtitle">精选高质量的学习材料</p>
+                </div>
+                <div class="resources-grid" id="resourcesGrid">
+                </div>
+            </div>
+        </section>
+
+        <section class="videos" id="videos">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">视频课程</h2>
+                    <p class="section-subtitle">B站未明子哲学系列精选</p>
+                </div>
+                <div class="videos-grid" id="videosGrid">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>关于平台</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">我们的使命</a></li>
+                        <li><a href="#">学术顾问</a></li>
+                        <li><a href="#">合作伙伴</a></li>
+                        <li><a href="#">联系我们</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>学习中心</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">课程目录</a></li>
+                        <li><a href="#">学习路径</a></li>
+                        <li><a href="#">研究方法</a></li>
+                        <li><a href="#">常见问题</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>社区</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">论坛</a></li>
+                        <li><a href="#">读书会</a></li>
+                        <li><a href="#">活动预告</a></li>
+                        <li><a href="#">贡献者</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>关注我们</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://space.bilibili.com/19769035" target="_blank"><i class="fab fa-bilibili"></i> 未明子B站</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                        <li><a href="#"><i class="fab fa-github"></i> GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 哲学与精神分析学习平台. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="modal" class="modal" role="dialog" aria-modal="true">
+        <div class="container">
+            <div class="modal-content">
+                <button class="close-modal" onclick="closeModal()" aria-label="关闭">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div id="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-bubble" onclick="toggleChat()" aria-label="打开对话">
+        <i class="fas fa-comments"></i>
+    </div>
+
+    <div class="chat-interface" id="chatInterface" role="dialog" aria-label="哲学导师对话">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <div class="chat-avatar" id="chatAvatar">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div>
+                    <h3 id="chatTitle">哲学导师</h3>
+                    <span class="chat-status" id="chatStatus">在线</span>
+                </div>
+            </div>
+            <button class="chat-close" onclick="toggleChat()" aria-label="关闭对话">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chat-messages" id="chatMessages" role="log" aria-live="polite">
+            <div class="message bot">
+                你好！我是你的哲学导师。有什么哲学问题想要探讨吗？或者点击上方的哲学家，与他们进行深度对话。
+            </div>
+        </div>
+        <div class="chat-suggestions" id="chatSuggestions">
+            <button class="suggestion-btn" onclick="askQuestion('什么是存在主义？')">什么是存在主义？</button>
+            <button class="suggestion-btn" onclick="askQuestion('解释一下拉康的镜像阶段')">拉康的镜像阶段</button>
+            <button class="suggestion-btn" onclick="askQuestion('尼采的上帝已死是什么意思？')">上帝已死</button>
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="输入你的问题..." id="chatInput" aria-label="输入消息">
+            <button class="chat-send" onclick="sendMessage()" aria-label="发送">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/data/philosophers.js"></script>
+    <script src="js/data/topics.js"></script>
+    <script src="js/data/resources.js"></script>
+    <script src="js/data/videos.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
