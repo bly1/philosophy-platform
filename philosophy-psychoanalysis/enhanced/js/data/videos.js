@@ -72,9 +72,9 @@ function renderVideos() {
     if (!grid) return;
     
     grid.innerHTML = VIDEOS.map(video => `
-        <div class="video-card" onclick="openVideo('${video.id}')">
+        <div class="video-card" onclick="openVideoModal('${video.id}', '${video.title.replace(/'/g, "\\'")}')">
             <div class="video-thumbnail">
-                <img src="${video.thumbnail}" alt="${video.title}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%23374151%22 width=%2216%22 height=%229%22/><text x=%228%22 y=%225%22 text-anchor=%22middle%22 fill=%22%239ca3af%22 font-size=%221%22>视频封面</text></svg>'">
+                <img src="${video.thumbnail}" alt="${video.title}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231a1a25%22 width=%2216%22 height=%229%22/><text x=%228%22 y=%225%22 text-anchor=%22middle%22 fill=%22%236b6966%22 font-size=%221%22>视频封面</text></svg>'">
                 <div class="play-icon">
                     <i class="fas fa-play"></i>
                 </div>
@@ -94,6 +94,59 @@ function renderVideos() {
     `).join('');
 }
 
+function openVideoModal(videoId, title) {
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay active';
+    modal.id = 'videoModal';
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            closeVideoModal();
+        }
+    };
+    
+    const bvid = videoId.startsWith('BV') || videoId.startsWith('av') ? videoId : 'BV' + videoId;
+    
+    modal.innerHTML = `
+        <div class="modal" style="max-width: 1000px;">
+            <div class="modal-header">
+                <h2 class="modal-title">${title}</h2>
+                <button class="modal-close" onclick="closeVideoModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 0;">
+                <div class="video-modal-container">
+                    <iframe 
+                        src="https://player.bilibili.com/player.html?${bvid.startsWith('BV') ? 'bvid' : 'aid'}=${bvid.replace('BV', '').replace('av', '')}&high_quality=1&danmaku=0" 
+                        allowfullscreen="true" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+    
+    document.addEventListener('keydown', handleVideoModalKeydown);
+}
+
+function closeVideoModal() {
+    const modal = document.getElementById('videoModal');
+    if (modal) {
+        modal.remove();
+        document.body.style.overflow = '';
+    }
+    document.removeEventListener('keydown', handleVideoModalKeydown);
+}
+
+function handleVideoModalKeydown(e) {
+    if (e.key === 'Escape') {
+        closeVideoModal();
+    }
+}
+
 function openVideo(videoId) {
-    window.open(`https://www.bilibili.com/video/${videoId}`, '_blank');
+    openVideoModal(videoId, '哲学视频');
 }

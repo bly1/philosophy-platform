@@ -9,7 +9,7 @@
     <meta property="og:description" content="探索思想的深度之旅">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="zh_CN">
-    <title>哲学与精神分析学习平台 - 增强版</title>
+    <title>哲学与精神分析学习平台</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/themes.css">
@@ -19,7 +19,7 @@
     <header>
         <nav class="container">
             <div class="logo">
-                <i class="fas fa-brain"></i>
+                <i class="fas fa-infinity"></i>
                 <span>哲学与精神分析</span>
             </div>
             <ul class="nav-links" id="navLinks">
@@ -46,13 +46,15 @@
 
     <main>
         <section id="home" class="hero">
+            <div class="hero-decoration"></div>
             <div class="container hero-content">
-                <h1>探索思想的深度之旅</h1>
+                <div class="hero-badge">探索思想的深度</div>
+                <h1>哲学与<span>精神分析</span></h1>
                 <p>在这里，哲学与精神分析相遇，带你深入理解人类意识的奥秘。与历史上的伟大哲学家对话，开启心智探索之旅。</p>
 
                 <div class="hero-stats">
                     <div class="stat-item">
-                        <div class="stat-number">50+</div>
+                        <div class="stat-number">12</div>
                         <div class="stat-label">哲学家</div>
                     </div>
                     <div class="stat-item">
@@ -124,14 +126,14 @@
                             <i class="fas fa-video"></i>
                         </div>
                         <h3>视频课程</h3>
-                        <p>精选B站未明子等优质UP主的哲学视频，深入浅出讲解复杂概念。</p>
+                        <p>精选B站未明子等优质UP主的哲学视频，站内直接播放，深入浅出讲解复杂概念。</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
-                            <i class="fas fa-book-reader"></i>
+                            <i class="fas fa-book-open"></i>
                         </div>
-                        <h3>丰富资源</h3>
-                        <p>精选哲学原典、现代解读、视频讲座等多种学习材料。支持中英双语对照学习。</p>
+                        <h3>原典阅读</h3>
+                        <p>在线阅读哲学经典原著PDF，从柏拉图到海德格尔，感受原汁原味的哲学思想。</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
@@ -242,52 +244,16 @@
         </div>
     </footer>
 
-    <div id="modal" class="modal" role="dialog" aria-modal="true">
-        <div class="container">
-            <div class="modal-content">
-                <button class="close-modal" onclick="closeModal()" aria-label="关闭">
+    <div id="modal" class="modal-overlay" role="dialog" aria-modal="true">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">详情</h2>
+                <button class="modal-close" onclick="closeModal()" aria-label="关闭">
                     <i class="fas fa-times"></i>
                 </button>
-                <div id="modal-body">
-                </div>
             </div>
-        </div>
-    </div>
-
-    <div class="chat-bubble" onclick="toggleChat()" aria-label="打开对话">
-        <i class="fas fa-comments"></i>
-    </div>
-
-    <div class="chat-interface" id="chatInterface" role="dialog" aria-label="哲学导师对话">
-        <div class="chat-header">
-            <div class="chat-header-info">
-                <div class="chat-avatar" id="chatAvatar">
-                    <i class="fas fa-brain"></i>
-                </div>
-                <div>
-                    <h3 id="chatTitle">哲学导师</h3>
-                    <span class="chat-status" id="chatStatus">在线</span>
-                </div>
+            <div class="modal-body" id="modal-body">
             </div>
-            <button class="chat-close" onclick="toggleChat()" aria-label="关闭对话">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="chat-messages" id="chatMessages" role="log" aria-live="polite">
-            <div class="message bot">
-                你好！我是你的哲学导师。有什么哲学问题想要探讨吗？或者点击上方的哲学家，与他们进行深度对话。
-            </div>
-        </div>
-        <div class="chat-suggestions" id="chatSuggestions">
-            <button class="suggestion-btn" onclick="askQuestion('什么是存在主义？')">什么是存在主义？</button>
-            <button class="suggestion-btn" onclick="askQuestion('解释一下拉康的镜像阶段')">拉康的镜像阶段</button>
-            <button class="suggestion-btn" onclick="askQuestion('尼采的上帝已死是什么意思？')">上帝已死</button>
-        </div>
-        <div class="chat-input">
-            <input type="text" placeholder="输入你的问题..." id="chatInput" aria-label="输入消息">
-            <button class="chat-send" onclick="sendMessage()" aria-label="发送">
-                <i class="fas fa-paper-plane"></i>
-            </button>
         </div>
     </div>
 
@@ -296,6 +262,7 @@
     <script src="js/data/topics.js"></script>
     <script src="js/data/resources.js"></script>
     <script src="js/data/videos.js"></script>
+    <script src="js/data/classics-pdf.js"></script>
     <script src="js/api.js"></script>
     <script src="js/chat.js"></script>
     <script src="js/search.js"></script>
