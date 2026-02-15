@@ -10,6 +10,7 @@ const App = {
         this.initScrollEffects();
         Search.init();
         Chat.init();
+        MusicPlayer.init();
     },
 
     loadTheme() {

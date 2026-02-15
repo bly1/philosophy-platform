@@ -4,7 +4,7 @@ const VIDEOS = [
         title: '【哲学真功夫】海德格尔的神仙微操 ——从康德命题学到费希特知识学',
         author: '未明子',
         authorLink: 'https://space.bilibili.com/19769035',
-        thumbnail: 'https://i0.hdslb.com/bfs/archive/default.jpg',
+        thumbnail: '',
         duration: '约2小时',
         views: '10万+',
         tags: ['海德格尔', '康德', '费希特', '观念论'],
@@ -15,7 +15,7 @@ const VIDEOS = [
         title: '从康德到海德格尔-导言',
         author: '未明子',
         authorLink: 'https://space.bilibili.com/19769035',
-        thumbnail: 'https://i0.hdslb.com/bfs/archive/default.jpg',
+        thumbnail: '',
         duration: '约1小时',
         views: '5万+',
         tags: ['康德', '海德格尔', '德国哲学'],
@@ -26,7 +26,7 @@ const VIDEOS = [
         title: '玩原神也能学海德格尔?(未明子切片)',
         author: '未明子',
         authorLink: 'https://space.bilibili.com/19769035',
-        thumbnail: 'https://i0.hdslb.com/bfs/archive/default.jpg',
+        thumbnail: '',
         duration: '约30分钟',
         views: '20万+',
         tags: ['海德格尔', '游戏哲学', '存在主义'],
@@ -37,7 +37,7 @@ const VIDEOS = [
         title: '未明子对德勒兹主义者和尼采主义者提出建议',
         author: '未明子',
         authorLink: 'https://space.bilibili.com/19769035',
-        thumbnail: 'https://i0.hdslb.com/bfs/archive/default.jpg',
+        thumbnail: '',
         duration: '约1小时',
         views: '8万+',
         tags: ['尼采', '德勒兹', '后现代主义'],
@@ -48,7 +48,7 @@ const VIDEOS = [
         title: '海德格尔与柏拉图',
         author: '未明子',
         authorLink: 'https://space.bilibili.com/19769035',
-        thumbnail: 'https://i0.hdslb.com/bfs/archive/default.jpg',
+        thumbnail: '',
         duration: '约1.5小时',
         views: '6万+',
         tags: ['海德格尔', '柏拉图', '存在论'],
@@ -59,7 +59,7 @@ const VIDEOS = [
         title: '海德格尔如何看待康德、笛卡尔的哲学?1个视频讲清楚《存在与时间》',
         author: '哲学共学小组',
         authorLink: 'https://space.bilibili.com/',
-        thumbnail: 'https://i0.hdslb.com/bfs/archive/default.jpg',
+        thumbnail: '',
         duration: '约45分钟',
         views: '3万+',
         tags: ['海德格尔', '存在与时间', '现象学'],
@@ -71,10 +71,15 @@ function renderVideos() {
     const grid = document.getElementById('videosGrid');
     if (!grid) return;
     
-    grid.innerHTML = VIDEOS.map(video => `
+    grid.innerHTML = VIDEOS.map(video => {
+        const thumbnailHtml = video.thumbnail 
+            ? `<img src="${video.thumbnail}" alt="${video.title}" onerror="this.parentElement.innerHTML='<div class=\\'video-thumbnail-placeholder\\'><i class=\\'fas fa-play-circle\\'></i><span>点击播放</span></div>'">`
+            : `<div class="video-thumbnail-placeholder"><i class="fas fa-play-circle"></i><span>点击播放</span></div>`;
+        
+        return `
         <div class="video-card" onclick="openVideoModal('${video.id}', '${video.title.replace(/'/g, "\\'")}')">
             <div class="video-thumbnail">
-                <img src="${video.thumbnail}" alt="${video.title}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231a1a25%22 width=%2216%22 height=%229%22/><text x=%228%22 y=%225%22 text-anchor=%22middle%22 fill=%22%236b6966%22 font-size=%221%22>视频封面</text></svg>'">
+                ${thumbnailHtml}
                 <div class="play-icon">
                     <i class="fas fa-play"></i>
                 </div>
@@ -91,7 +96,7 @@ function renderVideos() {
                 </div>
             </div>
         </div>
-    `).join('');
+    `}).join('');
 }
 
 function openVideoModal(videoId, title) {

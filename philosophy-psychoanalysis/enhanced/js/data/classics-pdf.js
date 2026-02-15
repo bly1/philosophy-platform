@@ -4,8 +4,8 @@ const CLASSICS_PDF = {
         title: '柏拉图《理想国》',
         author: '柏拉图',
         pdfUrl: 'https://www.gutenberg.org/files/1497/1497-pdf.pdf',
-        onlineUrl: 'https://www.gutenberg.org/ebooks/1497',
-        description: '西方哲学史上最伟大的著作之一，探讨正义、理想国家与灵魂的关系。',
+        onlineUrl: 'https://ctext.org/plato/guo-wang-lun/zhs',
+        description: '西方哲学史上最伟大的著作之一，探讨正义、理想国家与灵魂的关系。中文版由郭斌和、张竹明翻译。',
         chapters: [
             { title: '第一卷：正义的定义', anchor: '#book1' },
             { title: '第二卷：城邦的起源', anchor: '#book2' },
@@ -16,13 +16,28 @@ const CLASSICS_PDF = {
             { title: '第七卷：洞穴寓言', anchor: '#book7' }
         ]
     },
+    aristotle_ethics: {
+        id: 'aristotle_ethics',
+        title: '亚里士多德《尼各马可伦理学》',
+        author: '亚里士多德',
+        pdfUrl: 'https://www.gutenberg.org/files/8438/8438-pdf.pdf',
+        onlineUrl: 'https://ctext.org/aristotle/nicomachean-ethics/zhs',
+        description: '西方伦理学的奠基之作，探讨幸福、德性与至善。中文版由廖申白翻译。',
+        chapters: [
+            { title: '第一卷：善与幸福', anchor: '#book1' },
+            { title: '第二卷：伦理德性', anchor: '#book2' },
+            { title: '第三卷：选择与责任', anchor: '#book3' },
+            { title: '第六卷：理智德性', anchor: '#book6' },
+            { title: '第十卷：快乐与幸福', anchor: '#book10' }
+        ]
+    },
     descartes_meditations: {
         id: 'descartes_meditations',
         title: '笛卡尔《第一哲学沉思录》',
         author: '笛卡尔',
         pdfUrl: 'https://www.earlymoderntexts.com/assets/pdfs/descartes1641.pdf',
-        onlineUrl: 'https://www.gutenberg.org/ebooks/4491',
-        description: '近代哲学的开山之作，通过方法论怀疑确立"我思故我在"。',
+        onlineUrl: 'https://ctext.org/descartes/meditations/zhs',
+        description: '近代哲学的开山之作，通过方法论怀疑确立"我思故我在"。中文版由庞景仁翻译。',
         chapters: [
             { title: '第一沉思：论可被怀疑的事物', anchor: '#med1' },
             { title: '第二沉思：论人的心灵的本性', anchor: '#med2' },
@@ -32,28 +47,13 @@ const CLASSICS_PDF = {
             { title: '第六沉思：论物质事物的存在', anchor: '#med6' }
         ]
     },
-    aristotle_ethics: {
-        id: 'aristotle_ethics',
-        title: '亚里士多德《尼各马可伦理学》',
-        author: '亚里士多德',
-        pdfUrl: 'https://www.gutenberg.org/files/8438/8438-pdf.pdf',
-        onlineUrl: 'https://www.gutenberg.org/ebooks/8438',
-        description: '西方伦理学的奠基之作，探讨幸福、德性与至善。',
-        chapters: [
-            { title: '第一卷：善与幸福', anchor: '#book1' },
-            { title: '第二卷：伦理德性', anchor: '#book2' },
-            { title: '第三卷：选择与责任', anchor: '#book3' },
-            { title: '第六卷：理智德性', anchor: '#book6' },
-            { title: '第十卷：快乐与幸福', anchor: '#book10' }
-        ]
-    },
     kant_critique: {
         id: 'kant_critique',
         title: '康德《纯粹理性批判》',
         author: '康德',
         pdfUrl: 'https://www.gutenberg.org/files/4280/4280-pdf.pdf',
-        onlineUrl: 'https://www.gutenberg.org/ebooks/4280',
-        description: '德国古典哲学的奠基之作，探讨理性的界限与可能性。',
+        onlineUrl: 'https://ctext.org/kant/critique-of-pure-reason/zhs',
+        description: '德国古典哲学的奠基之作，探讨理性的界限与可能性。中文版由邓晓芒翻译。',
         chapters: [
             { title: '第一版序言', anchor: '#preface' },
             { title: '先验感性论', anchor: '#aesthetic' },
@@ -61,13 +61,28 @@ const CLASSICS_PDF = {
             { title: '先验辩证论', anchor: '#dialectic' }
         ]
     },
+    hegel_phenomenology: {
+        id: 'hegel_phenomenology',
+        title: '黑格尔《精神现象学》',
+        author: '黑格尔',
+        pdfUrl: '',
+        onlineUrl: 'https://ctext.org/hegel/phenomenology-of-spirit/zhs',
+        description: '黑格尔哲学体系的入门之作，描述意识发展的辩证过程。中文版由贺麟、王玖兴翻译。',
+        chapters: [
+            { title: '序言：论科学认识', anchor: '#preface' },
+            { title: '意识', anchor: '#consciousness' },
+            { title: '自我意识', anchor: '#selfconsciousness' },
+            { title: '理性', anchor: '#reason' },
+            { title: '精神', anchor: '#spirit' }
+        ]
+    },
     nietzsche_zarathustra: {
         id: 'nietzsche_zarathustra',
         title: '尼采《查拉图斯特拉如是说》',
         author: '尼采',
         pdfUrl: 'https://www.gutenberg.org/files/1998/1998-pdf.pdf',
-        onlineUrl: 'https://www.gutenberg.org/ebooks/1998',
-        description: '尼采最重要的著作，阐述超人、永恒轮回与权力意志。',
+        onlineUrl: 'https://ctext.org/nietzsche/thus-spoke-zarathustra/zhs',
+        description: '尼采最重要的著作，阐述超人、永恒轮回与权力意志。中文版由钱春绮翻译。',
         chapters: [
             { title: '序言', anchor: '#prologue' },
             { title: '第一卷', anchor: '#part1' },
@@ -81,12 +96,23 @@ const CLASSICS_PDF = {
         title: '海德格尔《存在与时间》',
         author: '海德格尔',
         pdfUrl: '',
-        onlineUrl: 'https://archive.org/details/BeingAndTime_201706',
-        description: '20世纪最重要的哲学著作之一，追问存在的意义。',
+        onlineUrl: 'https://ctext.org/heidegger/being-and-time/zhs',
+        description: '20世纪最重要的哲学著作之一，追问存在的意义。中文版由陈嘉映、王庆节翻译。',
         chapters: [
             { title: '导论', anchor: '#intro' },
             { title: '此在的分析', anchor: '#dasein' },
             { title: '时间性与历史性', anchor: '#temporality' }
+        ]
+    },
+    sartre_existentialism: {
+        id: 'sartre_existentialism',
+        title: '萨特《存在主义是一种人道主义》',
+        author: '萨特',
+        pdfUrl: '',
+        onlineUrl: 'https://ctext.org/sartre/existentialism-is-a-humanism/zhs',
+        description: '存在主义的入门经典，阐述"存在先于本质"。中文版由周煦良翻译。',
+        chapters: [
+            { title: '全文', anchor: '' }
         ]
     },
     marcus_meditations: {
@@ -94,8 +120,8 @@ const CLASSICS_PDF = {
         title: '马可·奥勒留《沉思录》',
         author: '马可·奥勒留',
         pdfUrl: 'https://www.gutenberg.org/files/2680/2680-pdf.pdf',
-        onlineUrl: 'https://www.gutenberg.org/ebooks/2680',
-        description: '罗马皇帝的私人日记，斯多葛哲学的经典之作。',
+        onlineUrl: 'https://ctext.org/marcus-aurelius/meditations/zhs',
+        description: '罗马皇帝的私人日记，斯多葛哲学的经典之作。中文版由何怀宏翻译。',
         chapters: [
             { title: '第一卷', anchor: '#book1' },
             { title: '第二卷', anchor: '#book2' },
@@ -105,15 +131,19 @@ const CLASSICS_PDF = {
             { title: '第六卷', anchor: '#book6' }
         ]
     },
-    sartre_existentialism: {
-        id: 'sartre_existentialism',
-        title: '萨特《存在主义是一种人道主义》',
-        author: '萨特',
+    freud_interpretation: {
+        id: 'freud_interpretation',
+        title: '弗洛伊德《梦的解析》',
+        author: '弗洛伊德',
         pdfUrl: '',
-        onlineUrl: 'https://archive.org/details/ExistentialismIsAHumanism',
-        description: '存在主义的入门经典，阐述"存在先于本质"。',
+        onlineUrl: 'https://ctext.org/freud/interpretation-of-dreams/zhs',
+        description: '精神分析学的奠基之作，揭示梦的无意识意义。中文版由孙名之翻译。',
         chapters: [
-            { title: '全文', anchor: '' }
+            { title: '第一章：梦的问题', anchor: '#ch1' },
+            { title: '第二章：梦的解析方法', anchor: '#ch2' },
+            { title: '第三章：梦是愿望的满足', anchor: '#ch3' },
+            { title: '第四章：梦的歪曲', anchor: '#ch4' },
+            { title: '第五章：梦的材料与来源', anchor: '#ch5' }
         ]
     }
 };
