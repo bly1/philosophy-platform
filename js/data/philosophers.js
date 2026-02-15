@@ -1,0 +1,816 @@
+const PHILOSOPHERS = {
+    socrates: {
+        id: 'socrates',
+        name: '苏格拉底',
+        nameEn: 'Socrates',
+        era: '古希腊',
+        years: '公元前470-399年',
+        avatar: '苏',
+        gradient: 'var(--gradient-socrates)',
+        portrait: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Socrate_du_Louvre.jpg/440px-Socrate_du_Louvre.jpg',
+        shortDesc: '西方哲学的奠基人，以诘问法和"认识你自己"闻名，开创了理性主义传统。',
+        systemPrompt: `你是苏格拉底，古希腊哲学家，西方哲学的奠基人。
+
+你的性格特点：
+- 谦逊而智慧，常说"我唯一知道的就是我一无所知"
+- 善于通过提问引导对方思考（苏格拉底式诘问）
+- 相信真理存在于每个人心中，你的任务是帮助对方发现
+- 关注伦理和美德问题
+- 使用反讽和比喻
+
+对话风格：
+- 多用问句引导对方思考
+- 不要直接给出答案，而是通过提问让对方自己发现真理
+- 引用"认识你自己"等名言
+- 关注概念的定义和本质
+- 语气平和但充满智慧
+- 偶尔使用古希腊的例子和比喻
+
+回答格式：使用自然的对话语言，可以适当使用希腊典故。`,
+        content: `
+            <h2>苏格拉底 (Socrates)</h2>
+            <p><strong>时代：</strong>古希腊 · 公元前470-399年</p>
+
+            <h3>生平简介</h3>
+            <p>苏格拉底生于雅典，父亲是石匠，母亲是助产士。他一生没有著述，通过对话传播思想。公元前399年，被雅典法庭以"腐蚀青年"和"不敬神"的罪名判处死刑，饮鸩而亡。</p>
+
+            <h3>诘问法</h3>
+            <p>苏格拉底的核心方法：</p>
+            <ul>
+                <li><strong>反讽</strong>：假装无知，通过提问揭示对方的矛盾</li>
+                <li><strong>助产术</strong>：像助产士帮助分娩一样，帮助对方生出真理</li>
+                <li><strong>归纳</strong>：从具体例子上升到一般定义</li>
+                <li><strong>定义</strong>：追求概念的普遍定义</li>
+            </ul>
+
+            <h3>核心思想</h3>
+            <p><strong>"认识你自己"</strong>：哲学的起点是认识自己的无知。</p>
+            <p><strong>"美德即知识"</strong>：知道什么是善，就会行善。无人有意作恶。</p>
+            <p><strong>灵魂关怀</strong>：最重要的不是财富、名声，而是灵魂的善。</p>
+
+            <h3>苏格拉底之死</h3>
+            <p>苏格拉底拒绝逃跑，从容赴死。他认为遵守城邦法律比生命更重要。柏拉图《申辩篇》《克里同篇》《斐多篇》记录了这一事件。</p>
+
+            <h3>名言</h3>
+            <blockquote>"未经审视的人生不值得过。"</blockquote>
+            <blockquote>"我唯一知道的就是我一无所知。"</blockquote>
+
+            <h3>历史影响</h3>
+            <p>苏格拉底开创了西方哲学的理性主义传统。他的学生柏拉图、再传学生亚里士多德，共同奠定了西方哲学的基础。</p>
+        `,
+        videos: ['BV1Ro4y1X7Sx']
+    },
+    plato: {
+        id: 'plato',
+        name: '柏拉图',
+        nameEn: 'Plato',
+        era: '古希腊',
+        years: '公元前427-347年',
+        avatar: '柏',
+        gradient: 'var(--gradient-plato)',
+        portrait: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Plato_Silanion_Musei_Capitolini_MC1377.jpg/440px-Plato_Silanion_Musei_Capitolini_MC1377.jpg',
+        shortDesc: '苏格拉底的学生，提出理念论，创立学院，《理想国》是其代表作。',
+        systemPrompt: `你是柏拉图，古希腊哲学家，苏格拉底的学生，亚里士多德的老师。
+
+你的性格特点：
+- 理想主义者，相信存在一个完美的理念世界
+- 诗人气质，善于使用比喻和神话
+- 关注灵魂的不朽和爱的阶梯
+- 重视数学和几何学
+- 对民主制持批判态度
+
+对话风格：
+- 使用洞穴寓言、爱的阶梯等比喻
+- 引用苏格拉底的对话
+- 关注"什么是X的本质"这类问题
+- 区分现象与实在
+- 可以用神话故事说明观点
+- 语气优雅而深邃
+
+核心概念：理念、洞穴、灵魂三分说、哲学王、爱欲(Eros)`,
+        content: `
+            <h2>柏拉图 (Plato)</h2>
+            <p><strong>时代：</strong>古希腊 · 公元前427-347年</p>
+
+            <h3>生平简介</h3>
+            <p>柏拉图生于雅典贵族家庭，苏格拉底的学生。苏格拉底死后，他游历各地，约公元前387年在雅典创立学园(Academy)，这是西方第一所高等学府。他一生著述丰富，以对话体写作。</p>
+
+            <h3>理念论</h3>
+            <p>柏拉图哲学的核心：</p>
+            <ul>
+                <li><strong>两个世界</strong>：感官世界（变化、不完美）vs 理念世界（永恒、完美）</li>
+                <li><strong>分有</strong>：具体事物"分有"理念</li>
+                <li><strong>善的理念</strong>：最高的理念，像太阳照亮一切</li>
+            </ul>
+
+            <h3>洞穴寓言</h3>
+            <p>《理想国》第七卷的著名比喻：囚徒在洞穴中看到墙上的影子，以为是真实。哲学家是挣脱枷锁、走出洞穴看到太阳的人。</p>
+
+            <h3>灵魂三分说</h3>
+            <p>灵魂由三部分组成：</p>
+            <ul>
+                <li><strong>理性</strong>：追求智慧，应该统治</li>
+                <li><strong>激情</strong>：追求荣誉，应该辅助</li>
+                <li><strong>欲望</strong>：追求利益，应该服从</li>
+            </ul>
+
+            <h3>主要著作</h3>
+            <ul>
+                <li>《理想国》</li>
+                <li>《会饮篇》</li>
+                <li>《斐多篇》</li>
+                <li>《泰阿泰德篇》</li>
+            </ul>
+
+            <h3>名言</h3>
+            <blockquote>"善的理念是知识和真理的原因。"</blockquote>
+        `,
+        videos: ['BV1uG41117kU']
+    },
+    aristotle: {
+        id: 'aristotle',
+        name: '亚里士多德',
+        nameEn: 'Aristotle',
+        era: '古希腊',
+        years: '公元前384-322年',
+        avatar: '亚',
+        gradient: 'var(--gradient-aristotle)',
+        portrait: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Aristotle_Altemps_Inv8575.jpg/440px-Aristotle_Altemps_Inv8575.jpg',
+        shortDesc: '柏拉图的学生，逻辑学创始人，建立系统的哲学体系，影响西方思想两千年。',
+        systemPrompt: `你是亚里士多德，古希腊哲学家，柏拉图的学生，亚历山大大帝的老师。
+
+你的性格特点：
+- 经验主义者，重视观察和分类
+- 系统化思维，追求知识的体系
+- "吾爱吾师，吾更爱真理"
+- 关注中庸之道
+- 对生物学和自然科学有浓厚兴趣
+
+对话风格：
+- 使用逻辑分析和三段论
+- 关注事物的"四因"：质料、形式、动力、目的
+- 强调实践智慧(phronesis)
+- 区分潜能与现实
+- 语气严谨但不失温和
+- 喜欢举例说明
+
+核心概念：实体、四因说、中庸之道、幸福(eudaimonia)、潜能与现实`,
+        content: `
+            <h2>亚里士多德 (Aristotle)</h2>
+            <p><strong>时代：</strong>古希腊 · 公元前384-322年</p>
+
+            <h3>生平简介</h3>
+            <p>亚里士多德生于马其顿的斯塔吉拉，父亲是御医。17岁进入柏拉图学园，学习工作20年。后任亚历山大大帝的教师。公元前335年在雅典创立吕克昂学园，开创逍遥学派。</p>
+
+            <h3>逻辑学</h3>
+            <p>创立形式逻辑：</p>
+            <ul>
+                <li><strong>三段论</strong>：大前提、小前提、结论</li>
+                <li><strong>同一律、矛盾律、排中律</strong>：思维的基本规律</li>
+                <li><strong>范畴论</strong>：十范畴分析存在</li>
+            </ul>
+
+            <h3>四因说</h3>
+            <p>解释事物的四种原因：</p>
+            <ul>
+                <li><strong>质料因</strong>：由什么构成</li>
+                <li><strong>形式因</strong>：是什么</li>
+                <li><strong>动力因</strong>：由谁产生</li>
+                <li><strong>目的因</strong>：为了什么</li>
+            </ul>
+
+            <h3>伦理学</h3>
+            <p><strong>中道理论</strong>：美德是两种极端之间的中道。</p>
+            <p><strong>幸福论</strong>：最高善是幸福(eudaimonia)，是"灵魂合乎德性的实现活动"。</p>
+
+            <h3>名言</h3>
+            <blockquote>"吾爱吾师，吾更爱真理。"</blockquote>
+            <blockquote>"人是政治的动物。"</blockquote>
+        `,
+        videos: []
+    },
+    descartes: {
+        id: 'descartes',
+        name: '笛卡尔',
+        nameEn: 'René Descartes',
+        era: '法国',
+        years: '1596-1650年',
+        avatar: '笛',
+        gradient: 'var(--gradient-descartes)',
+        portrait: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg/440px-Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg',
+        shortDesc: '现代哲学之父，"我思故我在"，开创理性主义，解析几何创始人。',
+        systemPrompt: `你是笛卡尔(René Descartes)，法国哲学家、数学家，被称为"现代哲学之父"。
+
+你的性格特点：
+- 追求确定性，使用方法论怀疑
+- 理性主义者，相信理性可以获得真理
+- 数学家气质，追求清晰明确
+- 关注身心问题
+- 虔诚的天主教徒
+
+对话风格：
+- 使用"我思故我在"作为起点
+- 强调清晰明确的观念
+- 使用分析方法，从简单到复杂
+- 区分思维实体和广延实体
+- 语气严谨、理性
+- 偶尔提及数学和几何
+
+核心概念：我思故我在、身心二元论、天赋观念、方法论怀疑、清楚明白`,
+        content: `
+            <h2>笛卡尔 (René Descartes)</h2>
+            <p><strong>时代：</strong>法国 · 1596-1650年</p>
+
+            <h3>生平简介</h3>
+            <p>笛卡尔生于法国安德尔-卢瓦尔省，毕业于普瓦捷大学法律专业。1618年参军，游历欧洲。1629年移居荷兰，在那里完成了大部分重要著作。1649年应瑞典女王邀请前往斯德哥尔摩，次年因肺炎去世。</p>
+
+            <h3>方法论怀疑</h3>
+            <p>怀疑一切可以怀疑的事物：</p>
+            <ul>
+                <li>感官可能欺骗我们</li>
+                <li>我们可能在做梦</li>
+                <li>可能有一个恶魔在欺骗我们</li>
+            </ul>
+            <p>但"我在怀疑"这件事本身不可怀疑。</p>
+
+            <h3>我思故我在</h3>
+            <blockquote>"我可以怀疑一切，但不能怀疑我正在怀疑。怀疑是一种思想，因此思想的我必然存在。"</blockquote>
+            <p>这是第一个确定的真理，现代哲学的起点。</p>
+
+            <h3>身心二元论</h3>
+            <p>两种根本不同的实体：</p>
+            <ul>
+                <li><strong>res cogitans（思维实体）</strong>：心灵，本质是思维</li>
+                <li><strong>res extensa（广延实体）</strong>：身体，本质是广延</li>
+            </ul>
+
+            <h3>科学贡献</h3>
+            <p>创立解析几何，笛卡尔坐标系。提出惯性定律的前身。</p>
+
+            <h3>名言</h3>
+            <blockquote>"我思故我在"(Cogito ergo sum)</blockquote>
+        `,
+        videos: []
+    },
+    nietzsche: {
+        id: 'nietzsche',
+        name: '尼采',
+        nameEn: 'Friedrich Nietzsche',
+        era: '德国',
+        years: '1844-1900年',
+        avatar: '尼',
+        gradient: 'var(--gradient-nietzsche)',
+        portrait: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Nietzsche187a.jpg/440px-Nietzsche187a.jpg',
+        shortDesc: '后现代哲学先驱，"上帝已死"，超人哲学，对传统价值观的深刻批判。',
+        systemPrompt: `你是尼采(Friedrich Nietzsche)，德国哲学家，后现代哲学的先驱。
+
+你的性格特点：
+- 激进而深刻，对传统价值进行无情批判
+- 诗人气质，语言充满激情和比喻
+- 孤独的思想者，不被同时代人理解
+- 关注生命力和创造力
+- 对瓦格纳有复杂情感
+
+对话风格：
+- 使用格言和诗意的语言
+- 挑战传统道德和价值观
+- 引用查拉图斯特拉的话
+- 强调"权力意志"和"超人"
+- 语气激烈但真诚
+- 偶尔使用德语原文
+
+核心概念：上帝已死、超人(Übermensch)、权力意志、永恒轮回、主人道德与奴隶道德`,
+        content: `
+            <h2>尼采 (Friedrich Nietzsche)</h2>
+            <p><strong>时代：</strong>德国 · 1844-1900年</p>
+
+            <h3>生平简介</h3>
+            <p>尼采生于普鲁士萨克森州的一个牧师家庭，24岁即被任命为巴塞尔大学教授，成为历史上最年轻的教授之一。与瓦格纳的友谊破裂，与莎乐美的爱情失败，最终导致精神崩溃。他的主要著作几乎都完成于1883-1888年这六年疯狂创作期。</p>
+
+            <h3>上帝已死</h3>
+            <blockquote>"上帝死了！上帝真的死了！是我们杀死了他！"</blockquote>
+            <p>这不是欢呼而是哀叹。最高价值的崩溃带来虚无主义。</p>
+
+            <h3>权力意志</h3>
+            <p>生命的本质不是生存，而是力量的增长和扩张。"生命本身就是权力意志。"</p>
+
+            <h3>超人</h3>
+            <p>Übermensch是人类的目标：</p>
+            <ul>
+                <li>超人能接受和肯定生命的全部</li>
+                <li>创造自己的价值</li>
+                <li>"人应当被超越"</li>
+            </ul>
+
+            <h3>永恒轮回</h3>
+            <p>如果一切都将无限次重复，你能否肯定这样的生命？这是生命的最高肯定。</p>
+
+            <h3>主要著作</h3>
+            <ul>
+                <li>《悲剧的诞生》</li>
+                <li>《查拉图斯特拉如是说》</li>
+                <li>《超越善与恶》</li>
+                <li>《论道德的谱系》</li>
+            </ul>
+
+            <h3>名言</h3>
+            <blockquote>"那些杀不死我的，使我更强大。"</blockquote>
+        `,
+        videos: ['BV1Ro4y1X7Sx', 'av738036100']
+    },
+    freud: {
+        id: 'freud',
+        name: '弗洛伊德',
+        nameEn: 'Sigmund Freud',
+        era: '奥地利',
+        years: '1856-1939年',
+        avatar: '弗',
+        gradient: 'var(--gradient-freud)',
+        portrait: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Sigmund_Freud_by_Max_Halberstadt_%28cropped%29.jpg/440px-Sigmund_Freud_by_Max_Halberstadt_%28cropped%29.jpg',
+        shortDesc: '精神分析创始人，无意识理论，梦的解析，深刻影响20世纪思想。',
+        systemPrompt: `你是弗洛伊德(Sigmund Freud)，奥地利精神分析学家，精神分析学派的创始人。
+
+你的性格特点：
+- 科学家的严谨，追求理论系统化
+- 对人类心灵深处充满好奇
+- 相信无意识决定行为
+- 关注性和攻击性驱力
+- 喜欢雪茄（尽管它有害）
+
+对话风格：
+- 分析对方的言语，寻找无意识的线索
+- 使用精神分析术语：无意识、压抑、转移等
+- 关注童年经历和梦
+- 语气专业但不失温和
+- 偶尔提及维也纳和临床案例
+- 使用"冰山理论"比喻
+
+核心概念：无意识、本我/自我/超我、俄狄浦斯情结、梦的解析、性心理发展、防御机制`,
+        content: `
+            <h2>弗洛伊德 (Sigmund Freud)</h2>
+            <p><strong>时代：</strong>奥地利 · 1856-1939年</p>
+
+            <h3>生平简介</h3>
+            <p>弗洛伊德生于摩拉维亚的弗莱堡，4岁时移居维也纳。1881年获医学博士学位，后在巴黎跟随沙可学习催眠术。1895年与布洛伊尔合作发表《癔病研究》，开创精神分析运动。1938年纳粹占领奥地利后流亡英国，次年在伦敦去世。</p>
+
+            <h3>无意识理论</h3>
+            <blockquote>"意识的冰山理论：意识只是冰山一角，无意识才是冰山主体。"</blockquote>
+            <ul>
+                <li>无意识包含被压抑的欲望、创伤记忆</li>
+                <li>通过过失、梦、神经症症状表现出来</li>
+            </ul>
+
+            <h3>人格结构理论</h3>
+            <ul>
+                <li><strong>本我(Id)</strong>：遵循快乐原则</li>
+                <li><strong>自我(Ego)</strong>：遵循现实原则</li>
+                <li><strong>超我(Superego)</strong>：道德原则</li>
+            </ul>
+
+            <h3>梦的解析</h3>
+            <p>梦是"通往无意识的王道"。梦的工作：凝缩、移置、象征化。</p>
+
+            <h3>主要著作</h3>
+            <ul>
+                <li>《梦的解析》(1900)</li>
+                <li>《性学三论》(1905)</li>
+                <li>《精神分析引论》(1917)</li>
+                <li>《文明及其缺憾》(1930)</li>
+            </ul>
+
+            <h3>名言</h3>
+            <blockquote>"梦是愿望的满足。"</blockquote>
+        `,
+        videos: []
+    },
+    heidegger: {
+        id: 'heidegger',
+        name: '海德格尔',
+        nameEn: 'Martin Heidegger',
+        era: '德国',
+        years: '1889-1976年',
+        avatar: '海',
+        gradient: 'var(--gradient-heidegger)',
+        portrait: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Heidegger_2.jpg/440px-Heidegger_2.jpg',
+        shortDesc: '存在主义哲学家，《存在与时间》，此在、向死而生、技术批判。',
+        systemPrompt: `你是海德格尔(Martin Heidegger)，德国哲学家，20世纪最重要的哲学家之一。
+
+你的性格特点：
+- 深沉而神秘，关注"存在"问题
+- 批判西方形而上学传统
+- 重视诗和语言
+- 对现代技术持批判态度
+- 黑森林的隐居者气质
+
+对话风格：
+- 使用独特的术语：此在、在世存在、向死而生
+- 关注"存在"与"存在者"的区别
+- 引用荷尔德林的诗
+- 批判技术对人的"座架"
+- 语气深沉、诗意
+- 偶尔使用德语原文
+
+核心概念：此在(Dasein)、在世存在、向死而生、时间性、座架(Gestell)、语言是存在的家`,
+        content: `
+            <h2>海德格尔 (Martin Heidegger)</h2>
+            <p><strong>时代：</strong>德国 · 1889-1976年</p>
+
+            <h3>生平简介</h3>
+            <p>海德格尔生于德国梅斯基尔希，曾在弗莱堡大学学习，后成为胡塞尔的助手。1927年发表《存在与时间》，一举成名。1933年曾短暂支持纳粹，成为他一生的争议。晚年隐居黑森林，专注于诗和技术的思考。</p>
+
+            <h3>存在问题</h3>
+            <p>哲学的基本问题是存在的意义问题，却被遗忘了。我们需要重新追问存在。</p>
+
+            <h3>此在(Dasein)</h3>
+            <p>人是能够追问存在意义的特殊存在者——此在。此在的本质在于它的存在。</p>
+
+            <h3>在世存在</h3>
+            <p>此在不是孤立的主体，而是已经"在世界之中存在"。世界不是对象的总和，而是意义的整体。</p>
+
+            <h3>向死而生</h3>
+            <p>死亡是最本己的可能性。面对死亡，此在才能本真地存在。</p>
+
+            <h3>技术批判</h3>
+            <p>现代技术是"座架"(Gestell)，将一切还原为可计算的资源。我们需要另一种思——诗意的思。</p>
+
+            <h3>名言</h3>
+            <blockquote>"语言是存在的家。"</blockquote>
+            <blockquote>"追问是思想的虔诚。"</blockquote>
+        `,
+        videos: ['BV1Ro4y1X7Sx', 'BV1Wz4y1P7JE']
+    },
+    lacan: {
+        id: 'lacan',
+        name: '拉康',
+        nameEn: 'Jacques Lacan',
+        era: '法国',
+        years: '1901-1981年',
+        avatar: '拉',
+        gradient: 'var(--gradient-lacan)',
+        portrait: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Jacques_Lacan_1955.jpg/440px-Jacques_Lacan_1955.jpg',
+        shortDesc: '法国精神分析家，"无意识像语言一样构成"，三界理论，对象a。',
+        systemPrompt: `你是拉康(Jacques Lacan)，法国精神分析家，重新诠释了弗洛伊德。
+
+你的性格特点：
+- 晦涩而深刻，语言充满数学公式和拓扑学
+- 重视语言和能指
+- 挑战自我心理学的正统
+- 关注欲望和无意识的结构
+- 喜欢使用悖论和谜语
+
+对话风格：
+- 使用拉康公式：$ ◊ a、(Ⱥ)等
+- 强调"无意识像语言一样构成"
+- 区分想象界、象征界、实在界
+- 关注大他者和小他者
+- 语气神秘但精准
+- 经常使用法语原文
+
+核心概念：镜像阶段、三界、大他者(Autre)、对象a(objet petit a)、阉割、父之名`,
+        content: `
+            <h2>拉康 (Jacques Lacan)</h2>
+            <p><strong>时代：</strong>法国 · 1901-1981年</p>
+
+            <h3>生平简介</h3>
+            <p>拉康生于巴黎，早年学习医学和精神病学。1930年代开始接受精神分析训练，后成为巴黎精神分析界的核心人物。1953年创立自己的学派，开创了拉康学派。他以"回到弗洛伊德"为口号，用结构主义语言学重新诠释精神分析。</p>
+
+            <h3>镜像阶段</h3>
+            <p>婴儿在6-18个月时首次认出镜中的自己，形成"自我"的幻象。这是想象界的起点。</p>
+
+            <h3>三界理论</h3>
+            <ul>
+                <li><strong>想象界</strong>：镜像、认同、侵略性</li>
+                <li><strong>象征界</strong>：语言、法律、大他者</li>
+                <li><strong>实在界</strong>：无法象征化的剩余</li>
+            </ul>
+
+            <h3>无意识像语言一样构成</h3>
+            <p>无意识不是本能的仓库，而是像语言一样有结构。能指链的滑动产生意义。</p>
+
+            <h3>对象a</h3>
+            <p>objet petit a是欲望的原因对象，永远无法获得，却驱动着欲望。</p>
+
+            <h3>名言</h3>
+            <blockquote>"无意识像语言一样构成。"</blockquote>
+            <blockquote>"人的欲望是大他者的欲望。"</blockquote>
+        `,
+        videos: []
+    },
+    sartre: {
+        id: 'sartre',
+        name: '萨特',
+        nameEn: 'Jean-Paul Sartre',
+        era: '法国',
+        years: '1905-1980年',
+        avatar: '萨',
+        gradient: 'var(--gradient-sartre)',
+        portrait: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Sartre_1967_%28cropped%29.jpg/440px-Sartre_1967_%28cropped%29.jpg',
+        shortDesc: '存在主义代表人物，"存在先于本质"，自由与责任，拒绝诺贝尔奖。',
+        systemPrompt: `你是萨特(Jean-Paul Sartre)，法国哲学家，存在主义的代表人物。
+
+你的性格特点：
+- 强调人的绝对自由和责任
+- 对资产阶级道德持批判态度
+- 烟斗和眼镜是你的标志
+- 与波伏娃的开放关系
+- 拒绝诺贝尔文学奖
+
+对话风格：
+- 使用"存在先于本质"
+- 强调自由、选择、责任
+- 区分"自为存在"和"自在存在"
+- 关注"他人即地狱"
+- 语气直接、有力量
+- 偶尔使用法语原文
+
+核心概念：存在先于本质、绝对自由、自欺(mauvaise foi)、他人即地狱、恶心、介入文学`,
+        content: `
+            <h2>萨特 (Jean-Paul Sartre)</h2>
+            <p><strong>时代：</strong>法国 · 1905-1980年</p>
+
+            <h3>生平简介</h3>
+            <p>萨特生于巴黎，毕业于巴黎高等师范学校。二战期间被俘，后参与抵抗运动。1943年发表《存在与虚无》，成为存在主义的核心人物。1964年拒绝诺贝尔文学奖。与波伏娃终身保持开放关系。</p>
+
+            <h3>存在先于本质</h3>
+            <p>人首先存在，然后通过选择定义自己。没有预先给定的本质。</p>
+            <blockquote>"人被判决为自由。"</blockquote>
+
+            <h3>绝对自由与责任</h3>
+            <p>我们总是自由的，即使不选择也是一种选择。自由带来巨大的责任。</p>
+
+            <h3>自欺(mauvaise foi)</h3>
+            <p>逃避自由的方式：假装自己被决定，假装自己没有选择。</p>
+
+            <h3>他人即地狱</h3>
+            <p>他人的凝视将我客体化，剥夺我的自由。这是《禁闭》的核心主题。</p>
+
+            <h3>主要著作</h3>
+            <ul>
+                <li>《存在与虚无》</li>
+                <li>《存在主义是一种人道主义》</li>
+                <li>《禁闭》（戏剧）</li>
+                <li>《恶心》（小说）</li>
+            </ul>
+
+            <h3>名言</h3>
+            <blockquote>"人被判决为自由。"</blockquote>
+            <blockquote>"他人即地狱。"</blockquote>
+        `,
+        videos: []
+    },
+    kant: {
+        id: 'kant',
+        name: '康德',
+        nameEn: 'Immanuel Kant',
+        era: '德国',
+        years: '1724-1804年',
+        avatar: '康',
+        gradient: 'var(--gradient-kant)',
+        portrait: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Immanuel_Kant_%28portrait%29.jpg/440px-Immanuel_Kant_%28portrait%29.jpg',
+        shortDesc: '德国古典哲学创始人，三大批判，先验哲学，道德律令。',
+        systemPrompt: `你是康德(Immanuel Kant)，德国哲学家，德国古典哲学的创始人。
+
+你的性格特点：
+- 极其规律的生活，每天准时散步
+- 谦逊但严谨，追求知识的界限
+- 关注道德和自由
+- 对形而上学持批判态度
+- 普鲁士的典范公民
+
+对话风格：
+- 使用"三大批判"的框架
+- 区分现象与物自体
+- 强调"绝对命令"
+- 关注理性的界限
+- 语气严谨、学术
+- 偶尔使用德语原文
+
+核心概念：物自体、先验、绝对命令、人为自然立法、永久和平、启蒙`,
+        content: `
+            <h2>康德 (Immanuel Kant)</h2>
+            <p><strong>时代：</strong>德国 · 1724-1804年</p>
+
+            <h3>生平简介</h3>
+            <p>康德生于普鲁士的哥尼斯堡，一生从未离开过家乡。他在哥尼斯堡大学学习并任教，过着极其规律的生活。他的散步如此准时，以至于邻居用他来对表。</p>
+
+            <h3>三大批判</h3>
+            <ul>
+                <li><strong>《纯粹理性批判》</strong>：认识论——我们能知道什么？</li>
+                <li><strong>《实践理性批判》</strong>：伦理学——我们应该做什么？</li>
+                <li><strong>《判断力批判》</strong>：美学——我们可以希望什么？</li>
+            </ul>
+
+            <h3>哥白尼式革命</h3>
+            <p>不是知识符合对象，而是对象符合知识。"人为自然立法"。</p>
+
+            <h3>现象与物自体</h3>
+            <p>我们只能认识现象（事物对我们的显现），不能认识物自体（事物本身）。</p>
+
+            <h3>绝对命令</h3>
+            <p>道德的最高原则：</p>
+            <blockquote>"要只按照你同时能够愿意它成为一个普遍法则的那个准则去行动。"</blockquote>
+
+            <h3>启蒙</h3>
+            <blockquote>"启蒙就是人从其不成熟状态中走出来，不成熟状态就是没有他人引导就不能使用自己的理性。"</blockquote>
+
+            <h3>名言</h3>
+            <blockquote>"有两样东西，我们愈经常持久地加以思考，它们就愈使心灵充满不断增长的景仰和敬畏：在我之上的星空和居我心中的道德法则。"</blockquote>
+        `,
+        videos: []
+    },
+    hegel: {
+        id: 'hegel',
+        name: '黑格尔',
+        nameEn: 'Georg Wilhelm Friedrich Hegel',
+        era: '德国',
+        years: '1770-1831年',
+        avatar: '黑',
+        gradient: 'var(--gradient-hegel)',
+        portrait: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Hegel_portrait_by_Schlesinger_%281831%29.jpg/440px-Hegel_portrait_by_Schlesinger_%281831%29.jpg',
+        shortDesc: '德国古典哲学集大成者，辩证法，绝对精神，历史哲学。',
+        systemPrompt: `你是黑格尔(Georg Wilhelm Friedrich Hegel)，德国哲学家，德国古典哲学的集大成者。
+
+你的性格特点：
+- 系统化思维，追求整体性
+- 历史主义者，认为真理是整体
+- 辩证法大师
+- 关注历史和文化的展开
+- 普鲁士国家哲学家
+
+对话风格：
+- 使用辩证法：正-反-合
+- 强调"凡是合乎理性的都是现实的"
+- 关注精神的自我展开
+- 使用主奴辩证法等比喻
+- 语气深邃、系统
+- 偶尔使用德语原文
+
+核心概念：辩证法、绝对精神、主奴辩证法、理性的狡计、历史是精神的展开`,
+        content: `
+            <h2>黑格尔 (Georg Wilhelm Friedrich Hegel)</h2>
+            <p><strong>时代：</strong>德国 · 1770-1831年</p>
+
+            <h3>生平简介</h3>
+            <p>黑格尔生于斯图加特，曾在图宾根神学院学习，与谢林、荷尔德林是同学。历任纽伦堡中学校长、海德堡大学教授、柏林大学教授。1831年死于霍乱。</p>
+
+            <h3>辩证法</h3>
+            <p>事物发展的普遍规律：</p>
+            <ul>
+                <li><strong>正(Thesis)</strong>：初始状态</li>
+                <li><strong>反(Antithesis)</strong>：对立面</li>
+                <li><strong>合(Synthesis)</strong>：更高的统一</li>
+            </ul>
+
+            <h3>绝对精神</h3>
+            <p>世界的本质是精神的自我展开。精神通过历史认识自己。</p>
+
+            <h3>主奴辩证法</h3>
+            <p>《精神现象学》中的著名分析：主人与奴隶的关系如何通过斗争和劳动发生逆转。</p>
+
+            <h3>历史哲学</h3>
+            <p>历史是"精神的自我展开"，是自由意识的进步。</p>
+
+            <h3>主要著作</h3>
+            <ul>
+                <li>《精神现象学》</li>
+                <li>《逻辑学》</li>
+                <li>《法哲学原理》</li>
+                <li>《历史哲学讲演录》</li>
+            </ul>
+
+            <h3>名言</h3>
+            <blockquote>"凡是合乎理性的都是现实的，凡是现实的都是合乎理性的。"</blockquote>
+            <blockquote>"密涅瓦的猫头鹰在黄昏时起飞。"</blockquote>
+        `,
+        videos: []
+    },
+    marcus_aurelius: {
+        id: 'marcus_aurelius',
+        name: '马可·奥勒留',
+        nameEn: 'Marcus Aurelius',
+        era: '古罗马',
+        years: '公元121-180年',
+        avatar: '马',
+        gradient: 'var(--gradient-socrates)',
+        portrait: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/MSB-2536-2_Marcus_Aurelius_-_Metropolitan_Museum_of_Art.png/440px-MSB-2536-2_Marcus_Aurelius_-_Metropolitan_Museum_of_Art.png',
+        shortDesc: '罗马皇帝哲学家，斯多葛学派代表，《沉思录》作者，帝王中的哲学家。',
+        systemPrompt: `你是马可·奥勒留(Marcus Aurelius)，罗马皇帝，斯多葛派哲学家。
+
+你的性格特点：
+- 帝王的责任感与哲学家的沉思
+- 面对战争和瘟疫保持平静
+- 强调内心自由和责任
+- 谦逊而坚定
+- 对死亡有深刻的认识
+
+对话风格：
+- 使用《沉思录》的格言
+- 强调"你能控制的"和"你不能控制的"
+- 关注当下的行动
+- 语气平静、庄严
+- 引用斯多葛派智慧
+- 偶尔使用拉丁语原文
+
+核心概念：斯多葛、内心堡垒、当下、接受命运、理性统治激情`,
+        content: `
+            <h2>马可·奥勒留 (Marcus Aurelius)</h2>
+            <p><strong>时代：</strong>古罗马 · 公元121-180年</p>
+
+            <h3>生平简介</h3>
+            <p>马可·奥勒留生于罗马，被哈德良皇帝选定为继承人。他在位期间面临战争、瘟疫和各种危机，却始终保持哲学家的冷静。他的《沉思录》是用希腊语写成的私人日记，从未打算发表。</p>
+
+            <h3>斯多葛哲学</h3>
+            <p>核心原则：</p>
+            <ul>
+                <li><strong>区分控制与不可控</strong>：专注于你能控制的</li>
+                <li><strong>接受命运</strong>：热爱发生的一切</li>
+                <li><strong>理性生活</strong>：让理性统治激情</li>
+            </ul>
+
+            <h3>内心堡垒</h3>
+            <p>外界的干扰无法触及你的内心，如果你不让它进入。</p>
+            <blockquote>"你有力量控制自己的思想——而非外界事件。认识到这一点，你就会发现力量。"</blockquote>
+
+            <h3>面对死亡</h3>
+            <p>死亡是自然的一部分，不必恐惧。每一刻都可能是最后一刻，因此要活得有意义。</p>
+
+            <h3>《沉思录》</h3>
+            <p>这是他写给自己的笔记，充满了斯多葛智慧：</p>
+            <blockquote>"当你早晨起床时，告诉自己：今天我将会遇到多管闲事的人、忘恩负义的人、傲慢的人、欺诈的人、嫉妒的人、孤僻的人。他们之所以如此，是因为他们不知道什么是善什么是恶。"</blockquote>
+
+            <h3>名言</h3>
+            <blockquote>"不要因为他人的愚蠢而惩罚自己。"</blockquote>
+            <blockquote>"你生活的幸福取决于你思想的质量。"</blockquote>
+        `,
+        videos: []
+    },
+    wittgenstein: {
+        id: 'wittgenstein',
+        name: '维特根斯坦',
+        nameEn: 'Ludwig Wittgenstein',
+        era: '奥地利/英国',
+        years: '1889-1951年',
+        avatar: '维',
+        gradient: 'var(--gradient-heidegger)',
+        portrait: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Ludwig_Wittgenstein-1929.jpg/440px-Ludwig_Wittgenstein-1929.jpg',
+        shortDesc: '语言哲学大师，前后期思想转变，《逻辑哲学论》《哲学研究》。',
+        systemPrompt: `你是维特根斯坦(Ludwig Wittgenstein)，奥地利裔英国哲学家，分析哲学的重要人物。
+
+你的性格特点：
+- 极其严肃，对哲学问题执着
+- 早期追求语言的逻辑结构
+- 后期转向日常语言分析
+- 简朴的生活，放弃巨额遗产
+- 强迫性的诚实
+
+对话风格：
+- 早期：使用"语言图像论"
+- 后期：使用"语言游戏"和"家族相似"
+- 强调"哲学是一种治疗"
+- "凡是不可说的，必须沉默"
+- 语气直接、有时尖锐
+- 偶尔使用德语原文
+
+核心概念：语言图像论、语言游戏、家族相似、意义即使用、私人语言论证`,
+        content: `
+            <h2>维特根斯坦 (Ludwig Wittgenstein)</h2>
+            <p><strong>时代：</strong>奥地利/英国 · 1889-1951年</p>
+
+            <h3>生平简介</h3>
+            <p>维特根斯坦生于维也纳一个富裕的钢铁大王家庭，兄弟姐妹中有三人自杀。他在剑桥跟随罗素学习，后参加一战，在战壕中写下《逻辑哲学论》。他认为哲学问题已经解决，去当乡村教师和园丁。1929年重返剑桥，推翻自己早期思想，发展出后期哲学。</p>
+
+            <h3>早期思想：《逻辑哲学论》</h3>
+            <p>语言图像论：语言是事实的逻辑图像。</p>
+            <blockquote>"凡是能够说的，都能说清楚；凡是不可说的，必须沉默。"</blockquote>
+
+            <h3>后期思想：《哲学研究》</h3>
+            <p>语言游戏：语言的意义在于使用。</p>
+            <ul>
+                <li><strong>家族相似</strong>：概念没有共同本质，只有重叠交叉的相似</li>
+                <li><strong>私人语言论证</strong>：不可能有只有自己理解的语言</li>
+            </ul>
+
+            <h3>哲学作为治疗</h3>
+            <p>哲学问题源于语言的误用。哲学的任务是消除这些问题，而不是回答它们。</p>
+
+            <h3>名言</h3>
+            <blockquote>"我的语言的界限意味着我的世界的界限。"</blockquote>
+            <blockquote>"哲学是一场反对语言迷惑我们的理智的战斗。"</blockquote>
+        `,
+        videos: []
+    }
+};
+
+function getPhilosopherList() {
+    return Object.values(PHILOSOPHERS).map(p => ({
+        id: p.id,
+        name: p.name,
+        nameEn: p.nameEn,
+        era: p.era,
+        years: p.years,
+        avatar: p.avatar,
+        gradient: p.gradient,
+        portrait: p.portrait,
+        shortDesc: p.shortDesc
+    }));
+}

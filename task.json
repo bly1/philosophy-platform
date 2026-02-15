@@ -25,7 +25,8 @@
         "获取公开访问URL",
         "测试所有功能正常工作"
       ],
-      "passes": false
+      "passes": true,
+      "deploy_url": "https://bly1.github.io/philosophy-platform/"
     },
     {
       "id": 2,

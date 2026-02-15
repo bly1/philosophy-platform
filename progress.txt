@@ -1,3 +1,52 @@
+## 2026-02-15 - 修复学习资源功能
+
+### What was done:
+1. 为学习资源卡片添加点击事件
+2. 创建 6 个学习资源的详细内容：
+   - 西方哲学史：完整课程大纲
+   - 哲学经典选读：柏拉图、笛卡尔、康德、尼采经典摘录
+   - 哲学讲座系列：推荐讲座列表
+   - 概念词典：本体论、辩证法、无意识、大他者等概念解释
+   - 思考训练：苏格拉底式诘问、思想实验、概念分析
+   - 学习小组：读书会、讨论组、导师答疑
+3. 更新部署文件并推送到 GitHub
+
+### Testing:
+- 本地测试模态窗口正常弹出
+- 所有资源卡片点击后显示对应内容
+- 推送到 GitHub 成功
+
+### Notes:
+- GitHub Pages 会自动更新，大约 1-2 分钟后生效
+- 访问地址：https://bly1.github.io/philosophy-platform/
+
+---
+
+## 2026-02-15 - 部署到 GitHub Pages 完成
+
+### What was done:
+1. 创建了新 GitHub 仓库：bly1/philosophy-platform
+2. 将增强版 HTML 复制到 docs 文件夹作为 index.html
+3. 推送代码到 GitHub
+4. 配置 GitHub Pages 从 docs 文件夹部署
+
+### 部署信息：
+- **网站地址**: https://bly1.github.io/philosophy-platform/
+- **仓库地址**: https://github.com/bly1/philosophy-platform
+- **部署方式**: GitHub Pages (docs 文件夹)
+- **状态**: ✅ 成功上线
+
+### Testing:
+- 网站可正常访问
+- 所有功能正常工作
+- 响应式设计表现良好
+
+### Notes:
+- 任何人都可以通过 https://bly1.github.io/philosophy-platform/ 访问
+- 如需更新，修改 docs/index.html 后推送即可
+
+---
+
 ## 2026-02-15 - 哲学学习平台增强版完成
 
 ### What was done:

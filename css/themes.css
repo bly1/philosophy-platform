@@ -1,0 +1,567 @@
+.dark-mode {
+    --parchment: #1a1816;
+    --parchment-dark: #2a2622;
+    --ink: #e8e4de;
+    --ink-light: #c9c4bc;
+    --gold: #d4a84b;
+    --gold-light: #e8c86b;
+    --sepia: #c9956b;
+    --sepia-light: #d4a87b;
+    --cream: #2a2622;
+    --ivory: #3d3832;
+    --gray-50: #2a2622;
+    --gray-100: #3d3832;
+    --gray-200: #4a443c;
+    --gray-300: #5c554b;
+    --gray-400: #7a7267;
+    --gray-500: #a8a094;
+    --gray-600: #c9c4bc;
+    --gray-700: #e0d8cc;
+    --gray-800: #f0ebe3;
+    --gray-900: #faf8f5;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 24px 60px rgba(0, 0, 0, 0.55);
+}
+
+.dark-mode body {
+    background: var(--parchment);
+    color: var(--ink);
+    background-image: 
+        linear-gradient(rgba(26, 24, 22, 0.95), rgba(26, 24, 22, 0.95)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+.dark-mode body::before {
+    background: 
+        radial-gradient(ellipse at top left, rgba(212, 168, 75, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(201, 149, 107, 0.05) 0%, transparent 50%);
+}
+
+.dark-mode header {
+    background: rgba(42, 38, 34, 0.95);
+    border-bottom-color: var(--gray-200);
+}
+
+.dark-mode header::after {
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.4;
+}
+
+.dark-mode .logo {
+    color: var(--gold);
+}
+
+.dark-mode .logo:hover {
+    color: var(--gold-light);
+}
+
+.dark-mode .nav-links a {
+    color: var(--ink-light);
+}
+
+.dark-mode .nav-links a:hover {
+    color: var(--gold);
+}
+
+.dark-mode .nav-links a::after {
+    background: var(--gold);
+}
+
+.dark-mode .search-box input {
+    background: var(--parchment-dark);
+    border-color: var(--gray-300);
+    color: var(--ink);
+}
+
+.dark-mode .search-box input:focus {
+    border-color: var(--gold);
+    background: var(--gray-100);
+}
+
+.dark-mode .search-box i {
+    color: var(--gray-400);
+}
+
+.dark-mode .search-results {
+    background: var(--parchment-dark);
+    border-color: var(--gray-200);
+}
+
+.dark-mode .search-result-item:hover {
+    background: var(--gray-100);
+}
+
+.dark-mode .search-result-type {
+    color: var(--gold);
+}
+
+.dark-mode .search-result-name {
+    color: var(--ink);
+}
+
+.dark-mode .hero {
+    background: linear-gradient(180deg, var(--parchment-dark) 0%, var(--parchment) 100%);
+}
+
+.dark-mode .hero::before {
+    background: radial-gradient(ellipse at center, rgba(212, 168, 75, 0.08) 0%, transparent 70%);
+}
+
+.dark-mode .hero::after {
+    color: var(--gold);
+}
+
+.dark-mode .hero h1 {
+    color: var(--ink);
+}
+
+.dark-mode .hero h1::before,
+.dark-mode .hero h1::after {
+    color: var(--gold);
+}
+
+.dark-mode .hero p {
+    color: var(--ink-light);
+}
+
+.dark-mode .stat-number {
+    color: var(--gold);
+}
+
+.dark-mode .stat-label {
+    color: var(--ink-light);
+}
+
+.dark-mode .stat-item::after {
+    color: var(--gold);
+}
+
+.dark-mode .quick-access {
+    background: var(--parchment-dark);
+    border-top-color: var(--gray-200);
+    border-bottom-color: var(--gray-200);
+}
+
+.dark-mode .quick-link {
+    background: var(--gray-100);
+    color: var(--ink-light);
+    border-color: var(--gray-200);
+}
+
+.dark-mode .quick-link:hover {
+    background: var(--sepia);
+    color: white;
+    border-color: var(--sepia);
+}
+
+.dark-mode .features {
+    background: var(--parchment-dark);
+}
+
+.dark-mode .features::before {
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.dark-mode .section-title {
+    color: var(--ink);
+}
+
+.dark-mode .section-title::before,
+.dark-mode .section-title::after {
+    color: var(--gold);
+}
+
+.dark-mode .section-subtitle {
+    color: var(--ink-light);
+}
+
+.dark-mode .feature-card {
+    background: var(--gray-100);
+    border-color: var(--gray-200);
+}
+
+.dark-mode .feature-card::before {
+    background: linear-gradient(90deg, var(--gold), var(--sepia));
+}
+
+.dark-mode .feature-card:hover {
+    border-color: var(--gold);
+}
+
+.dark-mode .feature-card h3 {
+    color: var(--ink);
+}
+
+.dark-mode .feature-card p {
+    color: var(--ink-light);
+}
+
+.dark-mode .philosophers {
+    background: var(--parchment);
+}
+
+.dark-mode .philosophers::before {
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.dark-mode .philosopher-card {
+    background: var(--gray-100);
+    border-color: var(--gray-200);
+}
+
+.dark-mode .philosopher-card::before {
+    background: linear-gradient(90deg, var(--gold), var(--sepia));
+}
+
+.dark-mode .philosopher-card:hover {
+    border-color: var(--gold);
+}
+
+.dark-mode .philosopher-card::after {
+    color: var(--gold);
+    background: rgba(212, 168, 75, 0.15);
+}
+
+.dark-mode .philosopher-portrait {
+    background: linear-gradient(135deg, var(--gray-200), var(--gray-100));
+}
+
+.dark-mode .philosopher-portrait-placeholder {
+    background: linear-gradient(135deg, var(--gray-200), var(--gray-100));
+    color: var(--gold);
+}
+
+.dark-mode .philosopher-info h3 {
+    color: var(--ink);
+}
+
+.dark-mode .philosopher-info .era {
+    color: var(--gold);
+}
+
+.dark-mode .philosopher-description {
+    color: var(--ink-light);
+}
+
+.dark-mode .philosopher-chat-btn {
+    background: transparent;
+    color: var(--gold);
+    border-color: var(--gold);
+}
+
+.dark-mode .philosopher-chat-btn:hover {
+    background: var(--gold);
+    color: var(--parchment);
+}
+
+.dark-mode .topics {
+    background: var(--parchment-dark);
+}
+
+.dark-mode .topics::before {
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.dark-mode .topic-card {
+    background: var(--gray-100);
+    border-color: var(--gray-200);
+}
+
+.dark-mode .topic-card::before {
+    background: var(--gold);
+}
+
+.dark-mode .topic-card:hover {
+    border-color: var(--gold);
+    background: linear-gradient(135deg, rgba(212, 168, 75, 0.08), rgba(201, 149, 107, 0.05));
+}
+
+.dark-mode .topic-card h3 {
+    color: var(--ink);
+}
+
+.dark-mode .topic-card p {
+    color: var(--ink-light);
+}
+
+.dark-mode .resources {
+    background: var(--parchment);
+}
+
+.dark-mode .resources::before {
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.dark-mode .resource-card {
+    background: linear-gradient(135deg, var(--gray-100), var(--parchment-dark));
+    border-color: var(--gray-200);
+}
+
+.dark-mode .resource-card::before {
+    opacity: 0.5;
+}
+
+.dark-mode .resource-card:hover {
+    border-color: var(--gold);
+}
+
+.dark-mode .resource-type {
+    background: rgba(212, 168, 75, 0.15);
+    color: var(--gold);
+}
+
+.dark-mode .resource-card h3 {
+    color: var(--ink);
+}
+
+.dark-mode .resource-card p {
+    color: var(--ink-light);
+}
+
+.dark-mode .resource-link {
+    color: var(--gold);
+}
+
+.dark-mode .resource-link:hover {
+    color: var(--gold-light);
+}
+
+.dark-mode .videos {
+    background: var(--parchment-dark);
+}
+
+.dark-mode .videos::before {
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.dark-mode .video-card {
+    background: var(--gray-100);
+    border-color: var(--gray-200);
+}
+
+.dark-mode .video-card:hover {
+    border-color: var(--gold);
+}
+
+.dark-mode .video-thumbnail {
+    background: var(--gray-200);
+}
+
+.dark-mode .video-thumbnail .play-icon {
+    background: rgba(42, 38, 34, 0.8);
+}
+
+.dark-mode .video-card:hover .play-icon {
+    background: var(--sepia);
+}
+
+.dark-mode .video-info h3 {
+    color: var(--ink);
+}
+
+.dark-mode .video-info .video-author {
+    color: var(--gold);
+}
+
+.dark-mode .video-info .video-meta {
+    color: var(--gray-400);
+}
+
+.dark-mode footer {
+    background: #1a1816;
+}
+
+.dark-mode footer::before {
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.dark-mode .footer-section h4 {
+    color: var(--gold);
+}
+
+.dark-mode .footer-links a {
+    color: var(--gray-400);
+}
+
+.dark-mode .footer-links a:hover {
+    color: var(--gold);
+}
+
+.dark-mode .footer-bottom {
+    border-top-color: var(--gray-200);
+    color: var(--gray-400);
+}
+
+.dark-mode .modal {
+    background: rgba(26, 24, 22, 0.85);
+}
+
+.dark-mode .modal-content {
+    background: var(--gray-100);
+    border-color: var(--gray-200);
+}
+
+.dark-mode .modal h2 {
+    color: var(--ink);
+}
+
+.dark-mode .modal h2::before {
+    color: var(--gold);
+}
+
+.dark-mode .modal h3 {
+    color: var(--sepia);
+}
+
+.dark-mode .modal p {
+    color: var(--ink-light);
+}
+
+.dark-mode .modal blockquote {
+    border-left-color: var(--gold);
+    color: var(--ink-light);
+    background: var(--parchment-dark);
+}
+
+.dark-mode .close-modal {
+    background: var(--gray-200);
+    border-color: var(--gray-300);
+    color: var(--ink-light);
+}
+
+.dark-mode .close-modal:hover {
+    background: var(--sepia);
+    color: white;
+    border-color: var(--sepia);
+}
+
+.dark-mode .chat-bubble {
+    background: linear-gradient(135deg, var(--sepia), var(--gold));
+}
+
+.dark-mode .chat-interface {
+    background: var(--gray-100);
+    border-color: var(--gray-200);
+}
+
+.dark-mode .chat-header {
+    background: linear-gradient(135deg, var(--sepia), var(--gold));
+}
+
+.dark-mode .chat-messages {
+    background: var(--parchment);
+}
+
+.dark-mode .message.user {
+    background: var(--sepia);
+}
+
+.dark-mode .message.bot {
+    background: var(--gray-200);
+    color: var(--ink);
+    border-color: var(--gray-300);
+}
+
+.dark-mode .chat-suggestions {
+    border-top-color: var(--gray-200);
+    background: var(--gray-100);
+}
+
+.dark-mode .suggestion-btn {
+    background: var(--gray-200);
+    border-color: var(--gray-300);
+    color: var(--ink-light);
+}
+
+.dark-mode .suggestion-btn:hover {
+    background: var(--sepia);
+    border-color: var(--sepia);
+    color: white;
+}
+
+.dark-mode .chat-input {
+    border-top-color: var(--gray-200);
+    background: var(--gray-100);
+}
+
+.dark-mode .chat-input input {
+    background: var(--parchment);
+    border-color: var(--gray-300);
+    color: var(--ink);
+}
+
+.dark-mode .chat-input input:focus {
+    border-color: var(--gold);
+}
+
+.dark-mode .chat-send {
+    background: var(--sepia);
+}
+
+.dark-mode .chat-send:hover {
+    background: var(--gold);
+}
+
+.dark-mode .btn-primary {
+    background: var(--sepia);
+    border-color: var(--sepia);
+}
+
+.dark-mode .btn-primary:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+}
+
+.dark-mode .btn-secondary {
+    background: transparent;
+    color: var(--gold);
+    border-color: var(--gold);
+}
+
+.dark-mode .btn-secondary:hover {
+    background: var(--gold);
+    color: var(--parchment);
+}
+
+.dark-mode .theme-toggle {
+    border-color: var(--gray-300);
+    color: var(--ink-light);
+}
+
+.dark-mode .theme-toggle:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+.dark-mode .typing-indicator span {
+    background: var(--gold);
+}
+
+.dark-mode details {
+    background: var(--gray-200);
+}
+
+.dark-mode details summary {
+    color: var(--gold);
+}
+
+.dark-mode details p {
+    color: var(--ink-light);
+}
+
+.dark-mode .nav-links {
+    background: var(--gray-100);
+}
+
+.dark-mode .nav-links a::before {
+    color: var(--gold);
+}
+
+@media (max-width: 768px) {
+    .dark-mode .nav-links {
+        background: var(--gray-100);
+        border-top-color: var(--gray-200);
+    }
+}

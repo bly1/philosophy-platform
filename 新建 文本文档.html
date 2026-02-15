@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智慧殿堂 - 哲学与精神分析</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Serif+SC:wght@300;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==================== 核心变量与重置 ==================== */
+        :root {
+            /* 古典配色方案 */
+            --bg-paper: #fdfbf7;      /* 羊皮纸背景 */
+            --bg-paper-dark: #f0ece2; /* 深色纸张 */
+            --ink-primary: #2c3e50;   /* 深墨蓝 */
+            --ink-secondary: #5d6d7e; /* 浅墨色 */
+            --accent-gold: #c0a062;   /* 古典金 */
+            --accent-red: #8b3a3a;    /* 封蜡红 */
+            
+            --font-serif: 'Noto Serif SC', 'Playfair Display', serif;
+            --font-display: 'Cinzel', serif;
+            
+            --card-shadow: 0 4px 20px rgba(44, 62, 80, 0.08);
+            --border-style: 1px solid rgba(44, 62, 80, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-serif);
+            background-color: var(--bg-paper);
+            color: var(--ink-primary);
+            line-height: 1.8;
+            /* 添加纸张噪点纹理 */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* ==================== 导航栏 ==================== */
+        header {
+            padding: 2rem 0;
+            border-bottom: 2px solid var(--ink-primary);
+            position: relative;
+        }
+        
+        header::after {
+            /* 双线边框效果 */
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--ink-primary);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--ink-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '§'; /* 使用特殊符号作为hover装饰 */
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: 0.3s;
+            color: var(--accent-gold);
+        }
+
+        .nav-links a:hover { color: var(--accent-gold); }
+        .nav-links a:hover::after { opacity: 1; top: -20px; }
+
+        /* ==================== 英雄区域 (Hero) ==================== */
+        .hero {
+            padding: 8rem 0 6rem;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(192, 160, 98, 0.1) 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--ink-secondary);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-style: italic;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            font-family: var(--font-display);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            background: transparent;
+        }
+
+        /* 古典按钮样式 */
+        .btn-primary {
+            border: 2px solid var(--ink-primary);
+            color: var(--ink-primary);
+            margin-right: 15px;
+        }
+
+        .btn-primary:hover {
+            background: var(--ink-primary);
+            color: var(--bg-paper);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 0 15px rgba(192, 160, 98, 0.3);
+        }
+
+        /* ==================== 快捷访问 (Themes) ==================== */
+        .quick-access {
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .quick-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .quick-link {
+            padding: 10px 20px;
+            border: 1px solid transparent;
+            color: var(--ink-secondary);
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+        }
+
+        .quick-link:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        /* ==================== 哲学家卡片 (重点改造) ==================== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-family: var(--font-display);
+            margin-bottom: 1rem;
+            display: inline-block;
+            border-bottom: 1px solid var(--accent-gold);
+            padding-bottom: 10px;
+        }
+
+        .philosophers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            padding: 20px;
+        }
+
+        /* 古典肖像卡片样式 */
+        .philosopher-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            box-shadow: 5px 5px 0px rgba(44, 62, 80, 0.1); /* 硬阴影复古感 */
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .philosopher-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 8px 8px 0px var(--accent-gold);
+            border-color: var(--accent-primary);
+        }
+
+        .card-image-wrapper {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        /* 图片黑白处理，hover变彩色 */
+        .card-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.1) sepia(0.2);
+            transition: filter 0.5s ease;
+        }
+
+        .philosopher-card:hover .card-image-wrapper img {
+            filter: grayscale(0%) sepia(0.1);
+        }
+
+        .card-content {
+            text-align: center;
+        }
+
+        .card-content h3 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            color: var(--ink-primary);
+        }
+
+        .card-content .school {
+            font-size: 0.9rem;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .card-content p {
+            font-size: 0.95rem;
+            color: var(--ink-secondary);
+            line-height: 1.6;
+        }
+
+        .quote {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            font-style: italic;
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        /* ==================== 探索主题 & 资源 ==================== */
+        .topics-grid, .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--bg-paper-dark);
+            padding: 30px;
+            border: 1px solid rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+        }
+
+        /* ==================== 聊天界面 (仿手稿/信笺) ==================== */
+        .chat-bubble {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--ink-primary);
+            color: var(--bg-paper);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            border: 2px solid var(--accent-gold);
+        }
+
+        .chat-interface {
+            display: none;
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 380px;
+            height: 500px;
+            background: #fff;
+            border: 4px double var(--ink-primary); /* 双线边框 */
+            z-index: 999;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .chat-interface.active { display: flex; }
+
+        .chat-header {
+            background: var(--ink-primary);
+            color: var(--bg-paper);
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: var(--bg-paper);
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            max-width: 80%;
+            font-size: 0.95rem;
+        }
+
+        .message.bot {
+            background: var(--bg-paper-dark);
+            border-left: 3px solid var(--accent-gold);
+            color: var(--ink-primary);
+        }
+
+        .message.user {
+            background: var(--ink-primary);
+            color: #fff;
+            margin-left: auto;
+            border-radius: 4px;
+        }
+
+        .chat-input {
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            gap: 10px;
+            background: #fff;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-bottom: 1px solid var(--ink-secondary);
+            font-family: var(--font-serif);
+            outline: none;
+        }
+
+        .chat-send {
+            background: none;
+            border: none;
+            color: var(--ink-primary);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        /* ==================== Footer ==================== */
+        footer {
+            background: var(--ink-primary);
+            color: #fff;
+            padding: 4rem 0 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h4 {
+            font-family: var(--font-display);
+            color: var(--accent-gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            display: block;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover { color: #fff; }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.2rem; }
+            .chat-interface { width: 90%; right: 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fas fa-columns"></i> <span>AGORA | 哲学</span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">大厅</a></li>
+                <li><a href="#philosophers">先贤</a></li>
+                <li><a href="#topics">概念</a></li>
+                <li><a href="#resources">典籍</a></li>
+            </ul>
+            <div class="search-box" style="position: relative;">
+                <i class="fas fa-search" style="color: var(--ink-secondary)"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container hero-content">
+                <h1>未经审视的人生<br>不值得一过</h1>
+                <p>—— 苏格拉底</p>
+                <div style="margin: 2rem 0; font-size: 1rem; color: #555;">
+                    探索西方哲学史 · 精神分析 · 现象学
+                </div>
+                <div class="buttons">
+                    <button class="btn btn-primary" onclick="startLearning()">
+                        开启思辨之旅
+                    </button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('philosophers').scrollIntoView({behavior: 'smooth'})">
+                        拜访哲学家
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="quick-access">
+            <div class="container">
+                <div class="quick-links">
+                    <a href="#" class="quick-link"># 存在与时间</a>
+                    <a href="#" class="quick-link"># 无意识</a>
+                    <a href="#" class="quick-link"># 超人哲学</a>
+                    <a href="#" class="quick-link"># 镜像阶段</a>
+                    <a href="#" class="quick-link"># 批判理论</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="philosophers" id="philosophers" style="padding: 5rem 0;">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">先贤殿堂</h2>
+                    <p class="section-subtitle">点击肖像，跨越时空与思想对话</p>
+                </div>
+                <div class="philosophers-grid" id="philosophersGrid"></div>
+            </div>
+        </section>
+
+        <section class="features" id="features" style="background-color: #f5f1e8; padding: 5rem 0;">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">求知路径</h2>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-comments"></i></div>
+                        <h3>AI 苏格拉底产婆术</h3>
+                        <p>通过不断的追问与反讽，助你从固有观念中解放，自行产出真理。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-book-open"></i></div>
+                        <h3>原典精读</h3>
+                        <p>海德格尔《存在与时间》、拉康《文集》等核心文本的逐句解析。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-film"></i></div>
+                        <h3>影像哲学</h3>
+                        <p>通过塔可夫斯基、伯格曼的电影镜头，直观感受哲学的在场。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>AGORA</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">学术委员会</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>学科</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">形而上学</a></li>
+                        <li><a href="#">伦理学</a></li>
+                        <li><a href="#">精神分析</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>关注</h4>
+                    <ul class="footer-links">
+                        <li><i class="fab fa-bilibili"></i> 未明子</li>
+                        <li><i class="fas fa-podcast"></i> 哲学电台</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 哲学与精神分析学习平台 | Designed for Deep Thinking</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="chat-bubble" onclick="toggleChat()">
+        <i class="fas fa-feather-alt"></i> </div>
+
+    <div class="chat-interface" id="chatInterface">
+        <div class="chat-header">
+            <div>
+                <h3 style="font-family: var(--font-display)">导师信箱</h3>
+                <span style="font-size: 0.8rem; opacity: 0.8">Reply from: Sigmund Freud</span>
+            </div>
+            <button onclick="toggleChat()" style="background:none; border:none; color:#fff; cursor:pointer;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot">
+                你好。如果你准备好面对你潜意识中的真实，请坐下来。我们从哪里开始？是关于你的梦，还是童年的记忆？
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="在此书写你的困惑..." id="chatInput">
+            <button class="chat-send" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 模拟哲学家数据，包含 Unsplash 图片 ID
+        const philosophers = [
+            {
+                name: "Friedrich Nietzsche",
+                cnName: "尼采",
+                school: "存在主义 / 唯意志论",
+                desc: "上帝已死。我们杀死了他。超人是人类的意义。",
+                quote: "凡不能毁灭我的，必使我更强大。",
+                imgId: "1555675865-c7e6c430e38a" // Unsplash ID
+            },
+            {
+                name: "Sigmund Freud",
+                cnName: "弗洛伊德",
+                school: "精神分析",
+                desc: "梦是通往潜意识的皇室大道。",
+                quote: "文明是建立在对本能的压抑之上的。",
+                imgId: "1544716278-ca5e3f4abd8c" // 老年人像替代
+            },
+            {
+                name: "Jacques Lacan",
+                cnName: "拉康",
+                school: "结构主义精神分析",
+                desc: "无意识像语言一样被结构着。",
+                quote: "欲望是他者的欲望。",
+                imgId: "1506794778202-cad84cf45f1d" // 男性肖像替代
+            },
+            {
+                name: "Martin Heidegger",
+                cnName: "海德格尔",
+                school: "现象学 / 存在主义",
+                desc: "人是向死而生的存在。",
+                quote: "语言是存在的家。",
+                imgId: "1500048993953-5612714db6fe" // 沉思者肖像替代
+            }
+        ];
+
+        // 动态生成哲学家卡片
+        function renderPhilosophers() {
+            const grid = document.getElementById('philosophersGrid');
+            grid.innerHTML = philosophers.map(p => `
+                <div class="philosopher-card" onclick="startChat('${p.cnName}')">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-${p.imgId}?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="${p.name}">
+                    </div>
+                    <div class="card-content">
+                        <h3>${p.cnName}</h3>
+                        <span class="school">${p.school}</span>
+                        <p>${p.desc}</p>
+                        <div class="quote">"${p.quote}"</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 聊天功能逻辑
+        function toggleChat() {
+            const chat = document.getElementById('chatInterface');
+            chat.classList.toggle('active');
+            if (chat.classList.contains('active')) {
+                document.getElementById('chatInput').focus();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const messages = document.getElementById('chatMessages');
+            const text = input.value.trim();
+            
+            if (text) {
+                // 用户消息
+                messages.innerHTML += `<div class="message user">${text}</div>`;
+                input.value = '';
+                
+                // 自动滚动到底部
+                messages.scrollTop = messages.scrollHeight;
+
+                // 模拟回复延迟
+                setTimeout(() => {
+                    messages.innerHTML += `<div class="message bot">这是一个深刻的问题。但在回答之前，我想问你：在这个问题背后，你真正渴望的是什么？</div>`;
+                    messages.scrollTop = messages.scrollHeight;
+                }, 1000);
+            }
+        }
+
+        function startChat(name) {
+            toggleChat();
+            const messages = document.getElementById('chatMessages');
+            messages.innerHTML += `<div class="message bot">我是${name}的AI化身。我已准备好与你对话。</div>`;
+        }
+
+        // 页面加载完成后渲染
+        document.addEventListener('DOMContentLoaded', renderPhilosophers);
+    </script>
+</body>
+</html>
