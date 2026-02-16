@@ -226,16 +226,12 @@
     background: var(--bg-tertiary);
 }
 
-.dark-mode .philosopher-portrait img {
-    filter: grayscale(15%) sepia(8%);
+.dark-mode .portrait-char {
+    color: rgba(255, 255, 255, 0.95);
 }
 
-.dark-mode .philosopher-card:hover .philosopher-portrait img {
-    filter: grayscale(0%) sepia(5%);
-}
-
-.dark-mode .philosopher-portrait-placeholder {
-    background: var(--bg-tertiary);
+.dark-mode .portrait-name {
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .dark-mode .philosopher-info h3 {

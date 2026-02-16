@@ -30,10 +30,10 @@ const App = {
         grid.innerHTML = philosophers.map(p => `
             <div class="philosopher-card" onclick="showPhilosopher('${p.id}')">
                 <div class="philosopher-portrait">
-                    ${p.portrait 
-                        ? `<img src="${p.portrait}" alt="${p.name}" onerror="this.parentElement.innerHTML='<div class=\\'philosopher-portrait-placeholder\\'><i class=\\'fas fa-user\\'></i><span>${p.nameEn}</span></div>'">` 
-                        : `<div class="philosopher-portrait-placeholder"><i class="fas fa-user"></i><span>${p.nameEn}</span></div>`
-                    }
+                    <div class="philosopher-portrait-art" style="background: ${p.gradient}">
+                        <span class="portrait-char">${p.avatar}</span>
+                        <span class="portrait-name">${p.nameEn}</span>
+                    </div>
                 </div>
                 <div class="philosopher-content">
                     <div class="philosopher-header">
